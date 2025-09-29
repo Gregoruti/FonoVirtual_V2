@@ -1,32 +1,49 @@
-# VALIDATION_STATUS.md
+# VALIDATION_STATUS.MD
+# Propósito: Documenta o status de validação de cada módulo e tela principal
+#            do projeto FonoVirtual_V2 (App X).
+#
+# Este arquivo é parte da documentação do FonoVirtual_V2.
+# Ele é crucial para rastrear o progresso e a confiabilidade de cada componente
+# desenvolvido no App X.
+#
+# Interconexões da Documentação (Fluxo Sugerido):
+#   [Prompt Geral] -> CONTEXT.MD ------> PATHS_FILES.MD
+#                     |                     &
+#                     |                  PATHS_SCREENS.MD
+#                     |                        |
+#                     V                        V
+#              CHANGELOG.MD <---- VALIDATION_STATUS.MD (Este Arquivo)
+#
+# Legenda de Status: [Validado | Em Teste | Falha | Pendente]
+# ---
 
-Este arquivo documenta o status de validação de cada módulo e tela principal do projeto. O status é definido por um dos seguintes valores: [Validado | Em Teste | Falha | Pendente].
+## Versão atual de desenvolvimento: 1.0.2 (29/09/2025)
 
 ## Status dos Módulos
 
-| Módulo | Status | Versão | Data | Notas |
-| --- | --- | --- | --- | --- |
-| Documentação (`/docs`) | Validado | 0.2.1 | 26/09/2025 | Estrutura da documentação completa e alinhada. |
-| ASR - Reconhecimento de Fala | Em Teste | 0.2.0 | 26/09/2025 | Função de teste `startTestRecognition` implementada para depuração. |
-| TTS - Síntese de Fala | Em Teste | 0.2.0 | 26/09/2025 | Módulo criado com função de teste `startTestToSpeech` para depuração. |
-| Armazenamento de Dados | Pendente | - | - | A ser implementado. |
-| Gerenciamento de Estado | Pendente | - | - | A ser implementado. |
-| Módulo de Treino de Palavras | Pendente | - | - | A ser implementado. |
-| Módulo de Treino de Frases | Pendente | - | - | A ser implementado. |
-| Módulo de Exercícios de Respiração | Pendente | - | - | Implementação Futura. Fora do escopo atual. |
-| Módulo de Articulação de Fonemas | Pendente | - | - | Implementação Futura. Fora do escopo atual. |
+| Módulo (Prompt Geral)      | Componente Principal (Arquivo/Classe Chave) | Status   | Versão | Data       | Notas Detalhadas e Feedback (se aplicável)                                                                                      |
+|----------------------------|---------------------------------------------|----------|--------|------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| Build do Projeto           | Gradle Build                                | Validado | 1.0.2  | 29/09/2025 | Build OK. App executa com `versionName` "1.0.2".                                                                              |
+| Documentação (`/docs`)     | Todos os arquivos .MD                       | Validado | 1.0.2  | 29/09/2025 | Documentação sincronizada com v1.0.2                                                                                           |
+| Core (Configs/Inicialização) | `CoreInitializationModule.kt` (Planejado)   | Pendente | -      | -          | Estrutura a ser definida.                                                                                                       |
+| Speech (ASR - Vosk)        | `VoskAsrModule.kt`                          | Validado | 1.0.2  | 29/09/2025 | Módulo ASR testado e validado com sucesso na AsrTestScreen                                                                     |
+| TTS (Síntese de Fala)      | `TextToSpeechModule.kt`                     | Validado | 0.4.0  | DD/MM/AAAA | TTS validado e estável.                                                                                                         |
+| UI (Telas e Navegação)     | `MainActivity.kt` (Nav), <br> Telas         | Validado | 1.0.2  | 29/09/2025 | Nav base OK. Todas as telas implementadas validadas.                                                                           |
+| Data (Persistência)        | `DataStorageModule.kt` (Planejado)          | Pendente | -      | -          | A ser implementado.                                                                                                             |
 
-## Status das Telas (UI)
+## Status das Telas (Componentes do Módulo UI)
 
-| Tela | Status | Versão | Data | Notas |
-| --- | --- | --- | --- | --- |
-| `MainActivity` | Em Teste | 0.2.1 | 26/09/2025 | Navegação principal com NavHost implementada. |
-| Splash Screen (Tela 1) | Validado | 0.2.1 | 26/09/2025 | Exibe imagem univesp.jpg, timer de 3s ou toque para navegação. Funcionou corretamente. |
-| `HomeScreen` (Tela 2) | Validado | 0.2.1 | 26/09/2025 | Exibe apenas a versão atual do app. Funcionou corretamente. |
-| `DebugScreen` | Em Teste | 0.2.0 | 26/09/2025 | Tela criada com botões para testar módulos ASR e TTS. |
-| `ProfessionalRegistrationScreen` | Pendente | - | - | O arquivo de esqueleto foi criado. |
-| `ProfessionalDashboardScreen` | Pendente | - | - | O arquivo de esqueleto foi criado. |
-| `PatientRegistrationScreen` | Pendente | - | - | O arquivo de esqueleto foi criado. |
-| `PatientDashboardScreen` | Pendente | - | - | O arquivo de esqueleto foi criado. |
-| `ExercisesScreen` | Pendente | - | - | O arquivo de esqueleto foi criado. |
-| `PhraseTrainingScreen` | Pendente | - | - | O arquivo de esqueleto foi criado. |
+| Tela                           | Arquivo Principal                             | Status   | Versão | Data       | Notas Detalhadas e Feedback                                                                                                                      |
+|--------------------------------|-----------------------------------------------|----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Navegação Principal            | `MainActivity.kt`                             | Validado | 1.0.2  | 29/09/2025 | Navegação Jetpack Compose OK. Todas as rotas implementadas validadas.                                                                             |
+| SplashScreen                   | `SplashScreen.kt`                             | Validado | 0.2.1  | DD/MM/AAAA | Verificado OK (v1.0.2).                                                                                                                          |
+| HomeScreen                     | `HomeScreen.kt`                               | Validado | 1.0.2  | 29/09/2025 | Exibe versão "1.0.2". Layout e nav básicas OK.                                                                                                  |
+| DebugScreen                    | `DebugScreen.kt`                              | Validado | 1.0.2  | 29/09/2025 | Botão TTS e ASR validados. Navegação para AsrTestScreen funcionando corretamente.                                                                |
+| TtsTestScreen                  | `TtsTestScreen.kt`                            | Validado | 0.4.0  | DD/MM/AAAA | Verificado OK (v1.0.2).                                                                                                                          |
+| AsrTestScreen                  | `AsrTestScreen.kt`                            | Validado | 1.0.2  | 29/09/2025 | UI e funcionalidade ASR validadas. Permissão de microfone e reconhecimento de voz funcionando corretamente.                                      |
+| ProfessionalRegistrationScreen | `ProfRegistrationScreen.kt` (Planejado)     | Pendente | -      | -          | A ser criada.                                                                                                                                    |
+| ProfessionalDashboardScreen  | `ProfDashboardScreen.kt` (Planejado)        | Pendente | -      | -          | A ser criada.                                                                                                                                    |
+| PatientRegistrationScreen      | `PatientRegistrationScreen.kt` (Planejado)  | Pendente | -      | -          | A ser criada.                                                                                                                                    |
+| PatientDashboardScreen         | `PatientDashboardScreen.kt` (Planejado)     | Pendente | -      | -          | A ser criada.                                                                                                                                    |
+| ExercisesScreen                | `ExercisesScreen.kt` (Planejado)              | Pendente | -      | -          | A ser criada.                                                                                                                                    |
+| PhraseTrainingScreen           | `PhraseTrainingScreen.kt` (Planejado)         | Pendente | -      | -          | A ser criada.                                                                                                                                    |
