@@ -34,9 +34,156 @@
 - **Próximos Passos Imediatos Relacionados:**
   - Remoção da seção de diretrizes gerais temporárias do arquivo `SPECIFICATION_FOR_APP.MD`.
 
+## 1.0.4 - 30/09/2025 - Implementação do Modo Claro
+
+- **Status Geral da Versão:** `✅ TOTALMENTE VALIDADO E ESTÁVEL`
+- **Resumo da Implementação:** Conversão completa do aplicativo do modo escuro para modo claro, garantindo
+  melhor legibilidade e interface mais limpa com fundo branco e textos pretos.
+
+### **Atualizações do Sistema de Tema (30/09/2025):**
+- **Theme.kt - Configuração Principal:**
+  - **Modo claro forçado:** Aplicativo sempre usa tema claro independente das configurações do sistema
+  - **Esquema de cores atualizado:**
+    - Background: Branco (`Color.White`)
+    - Surface: Branco (`Color.White`)
+    - Textos sobre fundo/superfície: Preto (`Color.Black`)
+    - Cor primária mantida: Azul (`Color(0xFF1976D2)`)
+  - **Parâmetro `darkTheme` sempre false:** Garantia de modo claro constante
+
+### **Atualizações da HomeScreen (30/09/2025):**
+- **Interface Visual Convertida para Modo Claro:**
+  - **Fundo alterado:** De preto para branco (`Color.White`)
+  - **Textos convertidos:** Todos os textos de branco para preto (`Color.Black`)
+    - Título "FonoVirtual" agora em preto
+    - Versão do app em preto
+    - "Projeto Integrador VI" em preto
+  - **Preview atualizado:** Background branco (`0xFFFFFFFF`)
+  - **Documentação atualizada:** Comentários refletem modo claro
+
+### **Melhorias de Usabilidade:**
+- **Legibilidade aprimorada:** Contraste otimizado com fundo branco e texto preto
+- **Consistência visual:** Todas as telas seguem o novo padrão de modo claro
+- **Interface moderna:** Design limpo e profissional mantido
+
+### **Componentes Validados:**
+- **Theme.kt:** Sistema de cores claro implementado e funcional
+- **HomeScreen.kt:** Interface convertida e testada no modo claro
+- **SplashScreen.kt:** Já estava compatível com fundo branco
+- **Demais telas:** Herdam automaticamente o novo tema claro
+
+- **Status de Validação:** ✅ **MODO CLARO COMPLETAMENTE VALIDADO**
+  - Tema claro aplicado em todo o aplicativo
+  - Legibilidade otimizada
+  - Interface consistente e profissional
+  - Compatibilidade mantida com todas as funcionalidades existentes
+
+## 1.0.3 - 29/09/2025 - Implementação do Exercício de Reconhecimento Simples
+
+- **Status Geral da Versão:** `✅ TOTALMENTE VALIDADO E ESTÁVEL`
+- **Resumo da Implementação:** Criação do primeiro módulo de exercícios completo e funcional, focando em reconhecimento
+  de palavras organizadas por número de sílabas (2-5 sílabas). **TODAS AS FUNCIONALIDADES TESTADAS E APROVADAS.**
+
+### **Atualizações Recentes da HomeScreen (29/09/2025):**
+- **Interface Visual Modernizada:**
+  - **Modo Escuro implementado:** Fundo preto com textos brancos para melhor contraste
+  - **Layout otimizado:** Melhor espaçamento vertical e horizontal entre elementos
+  - **Botões uniformizados:** Todos os botões agora têm largura completa (`fillMaxWidth()`)
+
+- **Reorganização dos Botões:**
+  - **"Cadastro/Seleção de Profissional e Paciente"** → **"Cadastro"** (simplificado)
+  - **"Teste Rápido"** (mantido, navega para exercícios)
+  - **"Atividades"** (novo botão adicionado)
+  - **"Resultados"** (novo botão adicionado)
+  - **"Debug"** (mantido na última posição)
+
+- **Melhorias na Tipografia:**
+  - Título "FonoVirtual" em branco com estilo `headlineLarge`
+  - Informações de versão e projeto em branco para contraste no fundo escuro
+  - Textos centralizados para melhor apresentação
+
+### **Atualização no Banco de Palavras (29/09/2025):**
+- **WordsRepository.kt:**
+  - **Palavras de 3 sílabas atualizadas:**
+    - "borboleta" → "projeto"
+    - "telefone" → "trabalho"
+  - **Palavras de 4 sílabas finalizadas:**
+    - Lista final: computação, integrador, chocolate, telefone, abacaxi
+  - **Palavras de 5 sílabas finalizadas:**
+    - Lista final: geografia, matemática, aplicativo, comunicação, universidade
+  - **Listas finais por sílabas:**
+    - 2 sílabas: casa, bola, pato, mesa, vida
+    - 3 sílabas: **projeto**, caminhar, **trabalho**, médico, música
+    - 4 sílabas: computação, **integrado**, chocolate, telefone, abacaxi
+    - 5 sílabas: geografia, matemática, aplicativo, comunicação, universidade
+  - Documentação atualizada em PATHS_SCREENS.md para refletir todas as mudanças
+
+### **Funcionalidades Principais Implementadas e Validadas:**
+- **SimpleRecognitionExerciseScreen:**
+  - Interface de seleção de nível por sílabas (2-5)
+  - Integração com ASR para reconhecimento contínuo (sem botão)
+  - Integração com TTS para exemplos sonoros
+  - Sistema de navegação entre palavras
+  - Verificação automática de acertos baseada em comparação de texto
+  - Status visual colorido (verde quando ouvindo, vermelho em erro)
+  - **ExerciseResultScreen:**
+    - Cálculo e exibição de percentual de acerto (0-100%)
+    - Estatísticas detalhadas (acertos, erros, total)
+    - Feedback motivacional baseado na performance
+    - Interface visual limpa com cores padrão do app
+    - Navegação para novo exercício ou retorno à home
+  - **SimpleRecognitionExerciseViewModel:**
+    - Lógica de negócio para exercícios
+    - Cálculo automático de estatísticas
+    - Gerenciamento de estado ASR/TTS
+    - Contadores de acertos e erros
+  - **WordsRepository:**
+    - Repositório de palavras organizadas por sílabas
+    - Suporte para 2-5 sílabas com palavras em português
+    - Interface para obter listas e contadores disponíveis
+  - **WordExercise (Modelo de Dados):**
+    - Estrutura de dados para exercícios
+    - Suporte a tentativas e histórico
+
+- **Melhorias Técnicas:**
+  - **Navegação Aprimorada:**
+    - Rota `exercise_result/{accuracy}/{correct}/{total}` para passar estatísticas
+    - Integração completa entre todas as telas do fluxo
+    - Gestão correta da pilha de navegação
+  - **Integração ASR/TTS:**
+    - Escuta contínua sem necessidade de botão
+    - Reprodução automática de exemplos
+    - Verificação inteligente de acertos
+  - **Interface do Usuário:**
+    - Design limpo e consistente
+    - Feedback visual em tempo real
+    - Cores padrão do app mantidas
+    - Botões sempre visíveis para melhor UX
+
+- **Correções e Ajustes:**
+  - Corrigida navegação que ficava "presa" na última palavra
+  - Implementado cálculo correto de percentual de acerto
+  - Ajustadas cores para manter consistência visual
+  - Removida lógica de cores dinâmicas por pontuação
+
+- **Arquivos Criados/Modificados:**
+  - `app/src/main/java/com/example/fonovirtual_v2/ui/exercises/recognition/SimpleRecognitionExerciseScreen.kt` (Novo)
+  - `app/src/main/java/com/example/fonovirtual_v2/ui/exercises/recognition/SimpleRecognitionExerciseViewModel.kt` (Novo)
+  - `app/src/main/java/com/example/fonovirtual_v2/ui/exercises/result/ExerciseResultScreen.kt` (Modificado)
+  - `app/src/main/java/com/example/fonovirtual_v2/data/exercises/recognition/WordsRepository.kt` (Novo)
+  - `app/src/main/java/com/example/fonovirtual_v2/ui/exercises/recognition/model/WordExercise.kt` (Novo)
+  - `app/src/main/java/com/example/fonovirtual_v2/MainActivity.kt` (Modificado)
+  - `app/src/main/java/com/example/fonovirtual_v2/ui/home/HomeScreen.kt` (Modificado)
+
+- **Status de Validação:** ✅ **TODOS OS COMPONENTES VALIDADOS**
+  - Fluxo completo testado e funcionando
+  - Cálculo de estatísticas correto
+  - Navegação entre telas estável
+  - Interface responsiva e intuitiva
+
 ## 1.0.2 - 29/09/2025 - Validação do Módulo ASR e Tela de Teste
 
 - **Status Geral da Versão:** `Validado`
+- **Commit Hash:** `43f679c`
 - **Resumo da Validação:** O módulo ASR (VoskAsrModule) e a tela de teste ASR (AsrTestScreen) foram completamente validados. A funcionalidade de reconhecimento de voz está operando corretamente, incluindo:
   - Gerenciamento de permissão do microfone
   - Inicialização do módulo Vosk

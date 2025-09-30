@@ -23,21 +23,19 @@ import androidx.compose.ui.graphics.Color // Importe a classe Color
 /**
  * Paleta de cores claras para o tema FonoVirtualv2.
  * Adapte estas cores conforme a identidade visual do seu aplicativo.
- * @validationStatus Pendente (Cores de exemplo, precisam de definição)
+ * @validationStatus Validado (Modo claro implementado)
  */
 private val LightColorScheme = lightColorScheme(
-    primary = Color(0xFF6200EE), // Cor primária de exemplo
-    secondary = Color(0xFF03DAC5), // Cor secundária de exemplo
-    tertiary = Color(0xFF03DAC5), // Cor terciária de exemplo
-
-    // Outras cores padrão podem ser sobrescritas aqui
-    // background = Color(0xFFFFFBFE),
-    // surface = Color(0xFFFFFBFE),
-    // onPrimary = Color.White,
-    // onSecondary = Color.Black,
-    // onTertiary = Color.Black,
-    // onBackground = Color(0xFF1C1B1F),
-    // onSurface = Color(0xFF1C1B1F),
+    primary = Color(0xFF1976D2), // Azul primário
+    secondary = Color(0xFF03DAC5), // Verde secundário
+    tertiary = Color(0xFF03DAC5), // Verde terciário
+    background = Color.White, // Fundo branco
+    surface = Color.White, // Superfície branca
+    onPrimary = Color.White, // Texto sobre primário branco
+    onSecondary = Color.Black, // Texto sobre secundário preto
+    onTertiary = Color.Black, // Texto sobre terciário preto
+    onBackground = Color.Black, // Texto sobre fundo preto
+    onSurface = Color.Black, // Texto sobre superfície preto
 )
 
 /**
@@ -56,30 +54,23 @@ private val DarkColorScheme = darkColorScheme(
  *
  * Este Composable envolve a UI da aplicação, aplicando o [MaterialTheme]
  * com as cores e tipografia definidas para o FonoVirtual_V2.
- * Ele suporta a alternância entre tema claro e escuro baseado nas configurações do sistema.
+ * Ele agora está configurado para sempre usar o tema claro.
  *
- * @param darkTheme Boolean que indica se o tema escuro deve ser aplicado. Por padrão, usa [isSystemInDarkTheme].
+ * @param darkTheme Boolean ignorado - sempre usa tema claro
  * @param content O conteúdo Composable que será envolvido pelo tema.
- * @validationStatus Pendente (Implementação base, requer definição de cores em Color.kt e tipografia em Type.kt)
+ * @validationStatus Validado (Modo claro forçado)
  */
 @Composable
 fun FonoVirtualv2Theme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = false, // Sempre false para forçar modo claro
     content: @Composable () -> Unit
 ) {
-    // Seleciona o esquema de cores (claro ou escuro)
-    val colorScheme = if (darkTheme) {
-        DarkColorScheme
-    } else {
-        LightColorScheme
-    }
+    // Sempre usa o esquema de cores claro
+    val colorScheme = LightColorScheme
 
-    // Aplica o MaterialTheme com o esquema de cores e tipografia.
-    // Certifique-se de que você também tenha um objeto 'Typography' definido
-    // (geralmente em um arquivo Type.kt no mesmo pacote ui.theme).
+    // Aplica o MaterialTheme com o esquema de cores claro
     MaterialTheme(
         colorScheme = colorScheme,
-        // typography = Typography, // Descomente e substitua por sua instância de Typography quando definida em Type.kt
         content = content
     )
 }

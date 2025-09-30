@@ -34,41 +34,45 @@
 │           │   │   ├── splash/
 │           │   │   │   └── SplashScreen.kt     // Tela Splash inicial (v0.2.1).
 │           │   │   ├── home/
-│           │   │   │   └── HomeScreen.kt       // Tela inicial da aplicação (Modificado v1.0.0: versão dinâmica).
+│           │   │   │   └── HomeScreen.kt       // Tela inicial da aplicação (Modificado v1.0.3: versão dinâmica "1.0.3", botão "Teste Rápido" integrado).
 │           │   │   ├── debug/
-│           │   │   │   └── DebugScreen.kt      // Tela para testar módulos. (Modificado v1.0.0: botão "Testar ASR" funcional).
-│           │   │   ├── tts_test/                 // (Novo Pacote v0.4.0) UI para Teste de TTS.
-│           │   │   │   ├── TtsTestScreen.kt    // (Novo v0.4.0) Tela Composable para teste de TTS.
-│           │   │   │   └── TtsTestViewModel.kt // (Novo v0.4.0) ViewModel para TtsTestScreen.
-│           │   │   ├── asr_test/                 // (Pacote e arquivos criados v1.0.1) UI para Teste de ASR.
-│           │   │   │   ├── AsrTestScreen.kt    // (Novo v1.0.1) Tela Composable para teste de ASR.
-│           │   │   │   └── AsrTestViewModel.kt // (Novo v1.0.1) ViewModel para AsrTestScreen.
-│           │   │   ├── exercises/                // (Estrutura futura)
-│           │   │   │   └── ExercisesScreen.kt  // (Estrutura futura)
-│           │   │   ├── professional/             // (Estrutura futura)
-│           │   │   │   ├── ProfessionalRegistrationScreen.kt // (Estrutura futura)
-│           │   │   │   └── ProfessionalDashboardScreen.kt  // (Estrutura futura)
-│           │   │   ├── patient/                  // (Estrutura futura)
-│           │   │   │   ├── PatientRegistrationScreen.kt    // (Estrutura futura)
-│           │   │   │   └── PatientDashboardScreen.kt     // (Estrutura futura)
-│           │   │   └── phrasetraining/           // (Estrutura futura)
-│           │   │       └── PhraseTrainingScreen.kt   // (Estrutura futura)
+│           │   │   │   └── DebugScreen.kt      // Tela para testar módulos. (Validado v1.0.2: botões ASR/TTS funcionais).
+│           │   │   ├── tts_test/                 // (Pacote v0.4.0) UI para Teste de TTS.
+│           │   │   │   ├── TtsTestScreen.kt    // (Validado v0.4.0) Tela Composable para teste de TTS.
+│           │   │   │   └── TtsTestViewModel.kt // (Validado v0.4.0) ViewModel para TtsTestScreen.
+│           │   │   ├── asr_test/                 // (Pacote v1.0.1) UI para Teste de ASR.
+│           │   │   │   ├── AsrTestScreen.kt    // (Validado v1.0.2) Tela Composable para teste de ASR.
+│           │   │   │   └── AsrTestViewModel.kt // (Validado v1.0.2) ViewModel para AsrTestScreen.
+│           │   │   ├── exercises/                // (Novo Pacote v1.0.3) Exercícios de fonoaudiologia.
+│           │   │   │   ├── recognition/          // (Novo v1.0.3) Exercícios de reconhecimento.
+│           │   │   │   │   ├── SimpleRecognitionExerciseScreen.kt    // (Novo v1.0.3) Tela de exercício de reconhecimento simples.
+│           │   │   │   │   ├── SimpleRecognitionExerciseViewModel.kt // (Novo v1.0.3) ViewModel com lógica de exercícios e estatísticas.
+│           │   │   │   │   └── model/                                 // (Novo v1.0.3) Modelos de dados para exercícios.
+│           │   │   │   │       └── WordExercise.kt                   // (Novo v1.0.3) Modelo de dados para palavras do exercício.
+│           │   │   │   └── result/               // (Novo v1.0.3) Telas de resultado de exercícios.
+│           │   │   │       └── ExerciseResultScreen.kt              // (Novo v1.0.3) Tela de resultados com estatísticas.
+│           │   │   └── [futuros pacotes...]      // Estruturas futuras mantidas.
+│           │   ├── data/                         // (Novo Pacote v1.0.3) Camada de dados.
+│           │   │   └── exercises/                // (Novo v1.0.3) Dados relacionados a exercícios.
+│           │   │       └── recognition/          // (Novo v1.0.3) Dados de exercícios de reconhecimento.
+│           │   │           └── WordsRepository.kt // (Novo v1.0.3) Repositório de palavras organizadas por sílabas.
 │           │   └── speech/                       // Pacote para funcionalidades de voz (ASR/TTS).
-│           │       ├── VoskAsrModule.kt        // (Modificado v1.0.0 - Inicialização Corrigida) Classe para reconhecimento de voz com Vosk.
-│           │       ├── TextToSpeechModule.kt   // (Novo v0.4.0) Classe para síntese de voz.
+│           │       ├── VoskAsrModule.kt        // (Validado v1.0.2) Classe para reconhecimento de voz com Vosk.
+│           │       ├── TextToSpeechModule.kt   // (Validado v0.4.0) Classe para síntese de voz.
 │           │       └── SpeechUtils.kt          // Utilitários para processamento de áudio/voz (Pendente - Remover se não utilizado).
 │           └── res/
 │               ├── drawable/                     // Recursos gráficos.
-│               │   └── univesp.jpg             // Imagem de abertura.
 │               ├── layout/                       // Arquivos de layout XML.
-│               └── values/
-│                   ├── strings.xml             // Definição de textos. (Modificado v1.0.1: strings para AsrTestScreen, removida string de placeholder).
-│                   └── colors.xml              // Definição de cores.
+│               ├── values/
+│               │   ├── strings.xml             // Definição de textos. (Validado v1.0.3: strings para exercícios).
+│               │   └── colors.xml              // Definição de cores.
+│               └── images/                       // (Validado v1.0.3) Diretório para imagens do projeto.
+│                   └── univesp.jpg             // Imagem de abertura (movida do drawable).
 └── docs/                                     // Diretório para a documentação do projeto.
-    ├── README.md                           // (Sugestão) Arquivo principal de informações do projeto.
-    ├── Prompt_Geral_Desenvolvimento_App_X.md // Cópia do prompt para referência versionada (Adicionado v1.0.0).
-    ├── CONTEXT.MD                          // Descreve o estado geral e a arquitetura do projeto (Atualizado v1.0.1).
-    ├── PATHS_FILES.MD                      // Este arquivo, documenta a estrutura de arquivos (Atualizado v1.0.1).
-    ├── PATHS_SCREENS.MD                    // Documenta as telas e fluxos de navegação (Atualizado v1.0.1).
-    ├── VALIDATION_STATUS.MD                // Status de validação e testes dos módulos e telas (Atualizado v1.0.1).
-    └── CHANGELOG.MD                        // Histórico de alterações do projeto (Atualizado v1.0.1).
+    ├── RULES_FILE.md                       // (Validado v1.0.3) Guia operacional mandatório para IA com regras de controle de versão.
+    ├── CONTEXT.MD                          // (Validado v1.0.3) Guia metodológico central.
+    ├── SPECIFICATION_FOR_APP.MD            // (Validado v1.0.3) Especificações específicas do projeto, todas as funcionalidades documentadas.
+    ├── PATHS_FILES.MD                      // (Validado v1.0.3) Este arquivo, documenta a estrutura de arquivos.
+    ├── PATHS_SCREENS.MD                    // (Validado v1.0.3) Documenta as telas e fluxos de navegação, incluindo exercícios.
+    ├── VALIDATION_STATUS.MD                // (Validado v1.0.3) Status de validação, todas as funcionalidades marcadas como validadas.
+    └── CHANGELOG.MD                        // (Validado v1.0.3) Histórico de alterações, v1.0.3 documentada como totalmente estável.

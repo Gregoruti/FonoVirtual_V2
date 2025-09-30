@@ -43,4 +43,24 @@
     <string name="asr_test_partial_result_label">Última Palavra Reconhecida:</string>
     <string name="asr_test_final_result_label">Frase Completa Reconhecida:</string>
 
+    <!-- Strings para Exercício de Reconhecimento -->
+    <string name="exercise_recognition_title">Exercício de Pronúncia</string>
+    <string name="exercise_select_syllables">Selecione o número de sílabas:</string>
+    <string name="exercise_listen_example">Ouvir Exemplo</string>
+    <string name="exercise_start_listening">Iniciar Gravação</string>
+    <string name="exercise_listening">Escutando...</string>
+    <string name="exercise_next_word">Próxima Palavra</string>
+    <string name="exercise_finish">Finalizar Exercício</string>
+
+    <!-- Status do Exercício -->
+    <string name="exercise_status_idle">Aguardando início da gravação</string>
+    <string name="exercise_status_starting">Iniciando gravação...</string>
+    <string name="exercise_status_listening">Escutando sua pronúncia...</string>
+    <string name="exercise_status_error">Erro na gravação</string>
+
+    <!-- Resultado do Exercício -->
+    <string name="exercise_result_title">Resultado do Exercício</string>
+    <string name="exercise_result_summary">Resumo do Exercício</string>
+    <string name="exercise_result_retry">Tentar Novamente</string>
+    <string name="exercise_result_home">Voltar ao Início</string>
 </resources>
