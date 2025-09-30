@@ -34,6 +34,52 @@
 - **Próximos Passos Imediatos Relacionados:**
   - Remoção da seção de diretrizes gerais temporárias do arquivo `SPECIFICATION_FOR_APP.MD`.
 
+## 1.0.5 - 30/09/2025 - Exercícios de Sons Consonantais "Xr"
+
+- **Status Geral da Versão:** `✅ TOTALMENTE VALIDADO E DEPLOYADO`
+- **Resumo da Implementação:** Implementação completa de exercícios focados em sons consonantais 
+  "Xr" (BR, CR, FR, GR) na tela "Teste Rápido", expandindo as opções de exercícios de fonoaudiologia.
+
+### **Nova Funcionalidade: Exercícios por Sons Consonantais (30/09/2025):**
+- **WordsRepository.kt - Novos Grupos de Palavras:**
+  - **BR**: brasil, branco, braço, bravo, biblioteca (5 palavras)
+  - **CR**: criança, criar, cravo, cristal, crescer (5 palavras)
+  - **FR**: fruta, frio, frase, frango, frequente (5 palavras)
+  - **GR**: grande, grupo, grau, grama, gratidão (5 palavras)
+  - **Total**: 20 novas palavras organizadas por grupos consonantais
+
+### **Interface Expandida na Tela "Teste Rápido" (30/09/2025):**
+- **Duas Linhas de Exercícios:**
+  - **Primeira linha**: Exercícios por Número de Sílabas
+    - Botões: **[2]** **[3]** **[4]** **[5]** (texto limpo, apenas números)
+  - **Divisor visual** separando as seções
+  - **Segunda linha**: Exercícios por Sons Consonantais (NOVO!)
+    - Botões: **[BR]** **[CR]** **[FR]** **[GR]**
+
+### **Melhorias na Interface (30/09/2025):**
+- **Botões de sílabas otimizados:** Removida palavra "sílabas", mantendo apenas números
+- **Layout equilibrado:** Duas seções bem definidas com títulos explicativos
+- **Experiência consistente:** Mesmo fluxo de exercício para ambos os tipos
+- **Compatibilidade mantida:** Todas as funcionalidades ASR/TTS funcionando
+
+### **Validação no Dispositivo (30/09/2025):**
+- **Deploy realizado:** Samsung Galaxy S10e (SM-G970F - Android 12)
+- **Testes funcionais:** Exercícios de sons consonantais validados pelo usuário
+- **Interface confirmada:** Layout com duas linhas funcionando perfeitamente
+- **ASR/TTS operacional:** Reconhecimento e síntese funcionando com novas palavras
+
+### **Componentes Atualizados:**
+- **WordsRepository.kt:** Estrutura expandida com grupos consonantais
+- **SimpleRecognitionExerciseViewModel.kt:** Suporte para ambos tipos de exercício
+- **SimpleRecognitionExerciseScreen.kt:** Interface com duas seções de botões
+- **build.gradle.kts:** Versão atualizada para "1.0.5"
+
+- **Status de Validação:** ✅ **EXERCÍCIOS DE SONS CONSONANTAIS COMPLETAMENTE VALIDADOS**
+  - Nova funcionalidade testada e aprovada no dispositivo
+  - Interface limpa e intuitiva confirmada
+  - 20 novas palavras funcionando perfeitamente
+  - Expansão bem-sucedida dos exercícios de fonoaudiologia
+
 ## 1.0.4 - 30/09/2025 - Implementação do Modo Claro e Deploy Completo
 
 - **Status Geral da Versão:** `✅ TOTALMENTE VALIDADO, ESTÁVEL E DEPLOYADO`

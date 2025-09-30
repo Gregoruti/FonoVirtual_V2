@@ -59,8 +59,8 @@ fun SimpleRecognitionExerciseScreen(
 
     // Efeito para monitorar quando não há mais palavras
     LaunchedEffect(currentWord) {
-        if (viewModel.selectedSyllableCount != null && currentWord == null) {
-            // Se já selecionou sílabas mas não tem palavra atual, significa que acabou
+        if ((viewModel.selectedSyllableCount != null || viewModel.selectedConsonantGroup != null) && currentWord == null) {
+            // Se já selecionou um tipo de exercício mas não tem palavra atual, significa que acabou
             navController.navigate("exercise_result") {
                 // Evita que o usuário volte para a última palavra ao pressionar voltar
                 popUpTo("simple_recognition") { inclusive = true }
@@ -87,8 +87,8 @@ fun SimpleRecognitionExerciseScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            if (viewModel.selectedSyllableCount == null) {
-                SyllableSelectionSection(viewModel = viewModel)
+            if (viewModel.selectedSyllableCount == null && viewModel.selectedConsonantGroup == null) {
+                ExerciseTypeSelectionSection(viewModel = viewModel)
             } else {
                 currentWord?.let { word ->
                     ExerciseSection(
@@ -128,15 +128,42 @@ fun SimpleRecognitionExerciseScreen(
 }
 
 @Composable
+private fun ExerciseTypeSelectionSection(viewModel: SimpleRecognitionExerciseViewModel) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ) {
+        Text(
+            text = "Escolha o tipo de exercício:",
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center
+        )
+
+        // Primeira linha: Exercícios por número de sílabas
+        SyllableSelectionSection(viewModel = viewModel)
+
+        // Divisor visual
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth(0.8f),
+            thickness = 1.dp,
+            color = MaterialTheme.colorScheme.outline
+        )
+
+        // Segunda linha: Exercícios por sons consonantais
+        ConsonantGroupSelectionSection(viewModel = viewModel)
+    }
+}
+
+@Composable
 private fun SyllableSelectionSection(viewModel: SimpleRecognitionExerciseViewModel) {
     val availableCounts = remember { WordsRepository.getAvailableSyllableCounts() }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text(
-            text = stringResource(R.string.exercise_select_syllables),
+            text = "Exercícios por Número de Sílabas",
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center
         )
@@ -148,6 +175,33 @@ private fun SyllableSelectionSection(viewModel: SimpleRecognitionExerciseViewMod
             availableCounts.forEach { count ->
                 Button(onClick = { viewModel.selectSyllableCount(count) }) {
                     Text(count.toString())
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ConsonantGroupSelectionSection(viewModel: SimpleRecognitionExerciseViewModel) {
+    val availableGroups = remember { WordsRepository.getAvailableConsonantGroups() }
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Text(
+            text = "Exercícios por Sons Consonantais",
+            style = MaterialTheme.typography.titleMedium,
+            textAlign = TextAlign.Center
+        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            availableGroups.forEach { group ->
+                Button(onClick = { viewModel.selectConsonantGroup(group) }) {
+                    Text(group)
                 }
             }
         }

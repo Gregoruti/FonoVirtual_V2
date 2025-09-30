@@ -20,9 +20,11 @@ import kotlinx.coroutines.launch
 /**
  * ViewModel para o exercício de reconhecimento simples de palavras.
  * Gerencia a lógica de negócios, integrando ASR e TTS para o exercício.
+ * Suporta exercícios por sílabas e por grupos consonantais (Xr).
  *
  * @param application Contexto da aplicação necessário para ASR e TTS
  * @since 1.0.3
+ * @updated 1.0.5 (30/09/2025) - Adicionado suporte para exercícios de sons consonantais
  * @validationStatus Em Desenvolvimento
  */
 class SimpleRecognitionExerciseViewModel(application: Application) : AndroidViewModel(application) {
@@ -38,8 +40,11 @@ class SimpleRecognitionExerciseViewModel(application: Application) : AndroidView
     private var currentWordsList: List<WordExercise> = emptyList()
     private var currentWordIndex = 0
 
-    // Estado da UI
+    // Estado da UI - tipos de exercício
     var selectedSyllableCount by mutableStateOf<Int?>(null)
+        private set
+
+    var selectedConsonantGroup by mutableStateOf<String?>(null)
         private set
 
     // Estados do ASR e TTS
@@ -83,15 +88,37 @@ class SimpleRecognitionExerciseViewModel(application: Application) : AndroidView
     }
 
     /**
-     * Seleciona um número de sílabas e carrega as palavras correspondentes.
+     * Seleciona o número de sílabas para o exercício e carrega as palavras correspondentes.
+     * @param syllableCount Número de sílabas (2 a 5)
      */
-    fun selectSyllableCount(count: Int) {
-        selectedSyllableCount = count
-        currentWordsList = WordsRepository.getWordsForSyllableCount(count)
-        totalWords = currentWordsList.size // Atualiza o total de palavras
+    fun selectSyllableCount(syllableCount: Int) {
+        selectedSyllableCount = syllableCount
+        selectedConsonantGroup = null // Reset do grupo consonantal
+        currentWordsList = WordsRepository.getWordsBySyllables(syllableCount)
         currentWordIndex = 0
-        loadNextWord()
-        startListening() // Inicia escuta ao selecionar sílabas
+        totalWords = currentWordsList.size
+        correctWords = 0
+
+        if (currentWordsList.isNotEmpty()) {
+            _currentWord.value = currentWordsList[0]
+        }
+    }
+
+    /**
+     * Seleciona o grupo consonantal para o exercício e carrega as palavras correspondentes.
+     * @param consonantGroup Grupo consonantal (BR, CR, FR, GR)
+     */
+    fun selectConsonantGroup(consonantGroup: String) {
+        selectedConsonantGroup = consonantGroup
+        selectedSyllableCount = null // Reset da contagem de sílabas
+        currentWordsList = WordsRepository.getWordsByConsonantGroup(consonantGroup)
+        currentWordIndex = 0
+        totalWords = currentWordsList.size
+        correctWords = 0
+
+        if (currentWordsList.isNotEmpty()) {
+            _currentWord.value = currentWordsList[0]
+        }
     }
 
     /**
