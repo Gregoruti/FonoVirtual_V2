@@ -109,6 +109,15 @@ Baseado no estado anterior do projeto (FonoVirtual_V2 v1.0.1):
         -   Compatibilidade mantida com todas as telas existentes via MaterialTheme. (Validado)
         -   Legibilidade e contraste otimizados para melhor experiência do usuário. (Validado)
         -   Interface consistente e profissional em todo o aplicativo. (Validado)
+    -   **Configuração de Ambiente de Desenvolvimento:**
+        -   `gradle.properties`: Configuração Java 17 LTS implementada com escape correto para Windows. (Validado)
+        -   `app/build.gradle.kts`: Versão atualizada para "1.0.4" e versionCode para 6. (Validado)
+        -   Compilação bem-sucedida com Java 17 (BUILD SUCCESSFUL em 1m 17s). (Validado)
+    -   **Deploy e Validação no Dispositivo:**
+        -   Deploy realizado com sucesso no Samsung Galaxy S10e (SM-G970F - Android 12). (Validado)
+        -   Instalação via ADB automatizada (BUILD SUCCESSFUL em 12s). (Validado)
+        -   Testes funcionais confirmados no dispositivo físico. (Validado)
+        -   Controle de versão sincronizado no GitHub (commit hash: d516298). (Validado)
 
 ## Funcionalidades em Desenvolvimento (UNDER_DEVELOPMENT)
 

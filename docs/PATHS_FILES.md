@@ -19,60 +19,77 @@
 
 /
 ├── app/                                  // Módulo principal da aplicação Android.
-│   ├── build.gradle.kts                  // Script de build do Gradle para o módulo :app (define versionName "1.0.1", buildConfig true).
+│   ├── build.gradle.kts                  // Script de build do Gradle para o módulo :app (define versionName "1.0.4", versionCode 6, buildConfig true).
 │   └── src/
 │       └── main/
 │           ├── AndroidManifest.xml           // Manifesto da aplicação, define componentes e permissões.
 │           ├── assets/                       // Diretório para arquivos brutos (raw assets).
 │           │   └── vosk-model-small-pt-0.3/  // Modelo de reconhecimento de voz (ASR).
 │           ├── java/com/example/fonovirtual_v2/
-│           │   ├── BuildConfig.java            // Gerado automaticamente, contém VERSION_NAME.
-│           │   ├── MainActivity.kt             // Activity principal. (Modificado v1.0.1: rota asr_test_screen aponta para AsrTestScreen.kt, placeholder removido).
+│           │   ├── BuildConfig.java            // Gerado automaticamente, contém VERSION_NAME "1.0.4".
+│           │   ├── MainActivity.kt             // Activity principal. (Modificado v1.0.3: navegação completa para exercícios com parâmetros).
 │           │   ├── ui/
 │           │   │   ├── theme/                    // Arquivos de tema do Jetpack Compose.
-│           │   │   │   └── Theme.kt            // (Novo v0.4.0)
+│           │   │   │   └── Theme.kt            // (Atualizado v1.0.4: modo claro forçado, esquema de cores branco/preto).
 │           │   │   ├── splash/
-│           │   │   │   └── SplashScreen.kt     // Tela Splash inicial (v0.2.1).
+│           │   │   │   └── SplashScreen.kt     // Tela Splash inicial (v0.2.1) - compatível com modo claro.
 │           │   │   ├── home/
-│           │   │   │   └── HomeScreen.kt       // Tela inicial da aplicação (Modificado v1.0.3: versão dinâmica "1.0.3", botão "Teste Rápido" integrado).
+│           │   │   │   └── HomeScreen.kt       // (Atualizado v1.0.4: modo claro com fundo branco e textos pretos, versão "1.0.4").
 │           │   │   ├── debug/
-│           │   │   │   └── DebugScreen.kt      // Tela para testar módulos. (Validado v1.0.2: botões ASR/TTS funcionais).
+│           │   │   │   └── DebugScreen.kt      // Tela para testar módulos. (Validado v1.0.2: compatível com modo claro via MaterialTheme).
 │           │   │   ├── tts_test/                 // (Pacote v0.4.0) UI para Teste de TTS.
-│           │   │   │   ├── TtsTestScreen.kt    // (Validado v0.4.0) Tela Composable para teste de TTS.
+│           │   │   │   ├── TtsTestScreen.kt    // (Validado v0.4.0) Tela Composable para teste de TTS - compatível com modo claro.
 │           │   │   │   └── TtsTestViewModel.kt // (Validado v0.4.0) ViewModel para TtsTestScreen.
 │           │   │   ├── asr_test/                 // (Pacote v1.0.1) UI para Teste de ASR.
-│           │   │   │   ├── AsrTestScreen.kt    // (Validado v1.0.2) Tela Composable para teste de ASR.
+│           │   │   │   ├── AsrTestScreen.kt    // (Validado v1.0.2) Tela Composable para teste de ASR - compatível com modo claro.
 │           │   │   │   └── AsrTestViewModel.kt // (Validado v1.0.2) ViewModel para AsrTestScreen.
-│           │   │   ├── exercises/                // (Novo Pacote v1.0.3) Exercícios de fonoaudiologia.
-│           │   │   │   ├── recognition/          // (Novo v1.0.3) Exercícios de reconhecimento.
-│           │   │   │   │   ├── SimpleRecognitionExerciseScreen.kt    // (Novo v1.0.3) Tela de exercício de reconhecimento simples.
-│           │   │   │   │   ├── SimpleRecognitionExerciseViewModel.kt // (Novo v1.0.3) ViewModel com lógica de exercícios e estatísticas.
-│           │   │   │   │   └── model/                                 // (Novo v1.0.3) Modelos de dados para exercícios.
-│           │   │   │   │       └── WordExercise.kt                   // (Novo v1.0.3) Modelo de dados para palavras do exercício.
-│           │   │   │   └── result/               // (Novo v1.0.3) Telas de resultado de exercícios.
-│           │   │   │       └── ExerciseResultScreen.kt              // (Novo v1.0.3) Tela de resultados com estatísticas.
-│           │   │   └── [futuros pacotes...]      // Estruturas futuras mantidas.
-│           │   ├── data/                         // (Novo Pacote v1.0.3) Camada de dados.
-│           │   │   └── exercises/                // (Novo v1.0.3) Dados relacionados a exercícios.
-│           │   │       └── recognition/          // (Novo v1.0.3) Dados de exercícios de reconhecimento.
-│           │   │           └── WordsRepository.kt // (Novo v1.0.3) Repositório de palavras organizadas por sílabas.
-│           │   └── speech/                       // Pacote para funcionalidades de voz (ASR/TTS).
-│           │       ├── VoskAsrModule.kt        // (Validado v1.0.2) Classe para reconhecimento de voz com Vosk.
-│           │       ├── TextToSpeechModule.kt   // (Validado v0.4.0) Classe para síntese de voz.
-│           │       └── SpeechUtils.kt          // Utilitários para processamento de áudio/voz (Pendente - Remover se não utilizado).
+│           │   │   ├── exercises/                // (Pacote v1.0.3) Exercícios de fonoaudiologia.
+│           │   │   │   ├── recognition/          // (v1.0.3) Exercícios de reconhecimento.
+│           │   │   │   │   ├── SimpleRecognitionExerciseScreen.kt    // (Validado v1.0.3) Tela de exercício - compatível com modo claro.
+│           │   │   │   │   ├── SimpleRecognitionExerciseViewModel.kt // (Validado v1.0.3) ViewModel com lógica de exercícios e estatísticas.
+│           │   │   │   │   └── model/                                 // (v1.0.3) Modelos de dados para exercícios.
+│           │   │   │   │       └── WordExercise.kt                   // (Validado v1.0.3) Modelo de dados para palavras do exercício.
+│           │   │   │   └── result/                                    // (Novo v1.0.3) Telas de resultado de exercícios.
+│           │   │   │       └── ExerciseResultScreen.kt               // (Validado v1.0.3) Tela de resultados com estatísticas - compatível com modo claro.
+│           │   │   └── speech/                   // Módulos de reconhecimento e síntese de fala.
+│           │   │       ├── VoskAsrModule.kt      // (Validado v1.0.2) Módulo ASR com Vosk, inicialização corrigida.
+│           │   │       └── TextToSpeechModule.kt // (Validado v0.4.0) Módulo TTS funcional.
+│           │   └── data/                         // (Novo Pacote v1.0.3) Camada de dados.
+│           │       └── exercises/                // (Novo v1.0.3) Dados para exercícios.
+│           │           └── recognition/          // (Novo v1.0.3) Dados de exercícios de reconhecimento.
+│           │               └── WordsRepository.kt // (Validado v1.0.3) Repositório de palavras organizadas por sílabas (2-5).
 │           └── res/
-│               ├── drawable/                     // Recursos gráficos.
-│               ├── layout/                       // Arquivos de layout XML.
 │               ├── values/
-│               │   ├── strings.xml             // Definição de textos. (Validado v1.0.3: strings para exercícios).
-│               │   └── colors.xml              // Definição de cores.
-│               └── images/                       // (Validado v1.0.3) Diretório para imagens do projeto.
-│                   └── univesp.jpg             // Imagem de abertura (movida do drawable).
-└── docs/                                     // Diretório para a documentação do projeto.
-    ├── RULES_FILE.md                       // (Validado v1.0.3) Guia operacional mandatório para IA com regras de controle de versão.
-    ├── CONTEXT.MD                          // (Validado v1.0.3) Guia metodológico central.
-    ├── SPECIFICATION_FOR_APP.MD            // (Validado v1.0.3) Especificações específicas do projeto, todas as funcionalidades documentadas.
-    ├── PATHS_FILES.MD                      // (Validado v1.0.3) Este arquivo, documenta a estrutura de arquivos.
-    ├── PATHS_SCREENS.MD                    // (Validado v1.0.3) Documenta as telas e fluxos de navegação, incluindo exercícios.
-    ├── VALIDATION_STATUS.MD                // (Validado v1.0.3) Status de validação, todas as funcionalidades marcadas como validadas.
-    └── CHANGELOG.MD                        // (Validado v1.0.3) Histórico de alterações, v1.0.3 documentada como totalmente estável.
+│               │   └── strings.xml           // Strings do aplicativo (Atualizado v1.0.3: strings para exercícios).
+│               └── drawable/
+│                   └── univesp.jpg           // Logo UNIVESP para SplashScreen.
+├── gradle.properties                     // (Atualizado v1.0.4: configuração Java 17 LTS com escape correto para Windows).
+├── build.gradle.kts                      // Script de build principal do projeto.
+├── settings.gradle.kts                   // Configurações do projeto Gradle.
+├── gradlew                               // Script wrapper do Gradle (Unix).
+├── gradlew.bat                           // Script wrapper do Gradle (Windows).
+├── local.properties                      // Configurações locais do SDK (não versionado).
+├── images/                               // (Novo v1.0.4) Diretório para imagens do projeto.
+│   └── univesp.jpg                       // Logo UNIVESP (localização atualizada).
+└── docs/                                 // (Atualizado v1.0.4) Documentação completa do projeto.
+    ├── CHANGELOG.md                      // (Atualizado v1.0.4) Histórico detalhado de versões com deploy no dispositivo.
+    ├── CONTEXT.md                        // Guia metodológico central de desenvolvimento.
+    ├── PATHS_FILES.md                    // (Este arquivo - Atualizado v1.0.4) Estrutura de arquivos e diretórios.
+    ├── PATHS_SCREENS.md                  // (Atualizado v1.0.3) Mapeamento de telas e navegação.
+    ├── RULES_FILE.md                     // Guia operacional mandatório para IA.
+    ├── SPECIFICATION_FOR_APP.md          // (Atualizado v1.0.4) Especificações completas com deploy validado.
+    └── VALIDATION_STATUS.md              // (Atualizado v1.0.4) Status de validação de módulos e telas.
+
+## Configurações de Ambiente (v1.0.4)
+
+### Java 17 LTS Configuration:
+- **gradle.properties**: Configuração forçada do Java 17 LTS
+- **Path**: C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.16.8-hotspot
+- **Escape**: Caracteres Windows corretamente escapados (C\\:\\Program Files\\...)
+- **Status**: Compilação bem-sucedida (BUILD SUCCESSFUL em 1m 17s)
+
+### Deploy Configuration:
+- **Target Device**: Samsung Galaxy S10e (SM-G970F - Android 12)
+- **ADB Path**: C:\\Users\\[USERNAME]\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe
+- **Install Status**: Pacote com.example.fonovirtual_v2 instalado e funcionando
+- **Validation**: Interface modo claro testada no dispositivo físico
