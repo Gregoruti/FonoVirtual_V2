@@ -47,6 +47,15 @@ class SimpleRecognitionExerciseViewModel(application: Application) : AndroidView
     var selectedConsonantGroup by mutableStateOf<String?>(null)
         private set
 
+    var selectedConsonantGroupXL by mutableStateOf<String?>(null)
+        private set
+
+    var selectedDigraph by mutableStateOf<String?>(null)
+        private set
+
+    var selectedTonicAccent by mutableStateOf<String?>(null)
+        private set
+
     // Estados do ASR e TTS
     val asrStatus = voskAsrModule.recognitionStatus
     val asrResult = voskAsrModule.lastPartialResult
@@ -93,7 +102,10 @@ class SimpleRecognitionExerciseViewModel(application: Application) : AndroidView
      */
     fun selectSyllableCount(syllableCount: Int) {
         selectedSyllableCount = syllableCount
-        selectedConsonantGroup = null // Reset do grupo consonantal
+        selectedConsonantGroup = null // Reset dos grupos consonantais
+        selectedConsonantGroupXL = null
+        selectedDigraph = null // Reset dos dígrafos
+        selectedTonicAccent = null // Reset do acento tônico
         currentWordsList = WordsRepository.getWordsBySyllables(syllableCount)
         currentWordIndex = 0
         totalWords = currentWordsList.size
@@ -105,13 +117,76 @@ class SimpleRecognitionExerciseViewModel(application: Application) : AndroidView
     }
 
     /**
-     * Seleciona o grupo consonantal para o exercício e carrega as palavras correspondentes.
+     * Seleciona o grupo consonantal Xr para o exercício e carrega as palavras correspondentes.
      * @param consonantGroup Grupo consonantal (BR, CR, FR, GR)
      */
     fun selectConsonantGroup(consonantGroup: String) {
         selectedConsonantGroup = consonantGroup
         selectedSyllableCount = null // Reset da contagem de sílabas
+        selectedConsonantGroupXL = null // Reset do grupo XL
+        selectedDigraph = null // Reset dos dígrafos
+        selectedTonicAccent = null // Reset do acento tônico
         currentWordsList = WordsRepository.getWordsByConsonantGroup(consonantGroup)
+        currentWordIndex = 0
+        totalWords = currentWordsList.size
+        correctWords = 0
+
+        if (currentWordsList.isNotEmpty()) {
+            _currentWord.value = currentWordsList[0]
+        }
+    }
+
+    /**
+     * Seleciona o grupo consonantal Xl para o exercício e carrega as palavras correspondentes.
+     * @param consonantGroup Grupo consonantal (CL, FL, PL, BL)
+     */
+    fun selectConsonantGroupXL(consonantGroup: String) {
+        selectedConsonantGroupXL = consonantGroup
+        selectedSyllableCount = null // Reset da contagem de sílabas
+        selectedConsonantGroup = null // Reset do grupo Xr
+        selectedDigraph = null // Reset dos dígrafos
+        selectedTonicAccent = null // Reset do acento tônico
+        currentWordsList = WordsRepository.getWordsByConsonantGroupXL(consonantGroup)
+        currentWordIndex = 0
+        totalWords = currentWordsList.size
+        correctWords = 0
+
+        if (currentWordsList.isNotEmpty()) {
+            _currentWord.value = currentWordsList[0]
+        }
+    }
+
+    /**
+     * Seleciona um dígrafo para o exercício e carrega as palavras correspondentes.
+     * @param digraph Dígrafo selecionado (ex: "ch", "lh", "nh")
+     */
+    fun selectDigraph(digraph: String) {
+        selectedDigraph = digraph
+        selectedSyllableCount = null // Reset da contagem de sílabas
+        selectedConsonantGroup = null // Reset do grupo Xr
+        selectedConsonantGroupXL = null // Reset do grupo XL
+        selectedTonicAccent = null // Reset do acento tônico
+        currentWordsList = WordsRepository.getWordsByDigraph(digraph)
+        currentWordIndex = 0
+        totalWords = currentWordsList.size
+        correctWords = 0
+
+        if (currentWordsList.isNotEmpty()) {
+            _currentWord.value = currentWordsList[0]
+        }
+    }
+
+    /**
+     * Seleciona um acento tônico para o exercício e carrega as palavras correspondentes.
+     * @param tonicAccent Acento tônico selecionado (ex: "á", "é", "í", "ó", "ú")
+     */
+    fun selectTonicAccent(tonicAccent: String) {
+        selectedTonicAccent = tonicAccent
+        selectedSyllableCount = null // Reset da contagem de sílabas
+        selectedConsonantGroup = null // Reset do grupo Xr
+        selectedConsonantGroupXL = null // Reset do grupo XL
+        selectedDigraph = null // Reset dos dígrafos
+        currentWordsList = WordsRepository.getWordsByTonicAccent(tonicAccent)
         currentWordIndex = 0
         totalWords = currentWordsList.size
         correctWords = 0
@@ -126,9 +201,9 @@ class SimpleRecognitionExerciseViewModel(application: Application) : AndroidView
      * @return true se há uma próxima palavra, false se o exercício terminou
      */
     fun loadNextWord(): Boolean {
+        currentWordIndex++
         if (currentWordIndex < currentWordsList.size) {
             _currentWord.value = currentWordsList[currentWordIndex]
-            currentWordIndex++
             // Reinicia a escuta para a nova palavra
             if (asrStatus.value !is AsrRecognitionStatus.Listening) {
                 startListening()

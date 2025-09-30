@@ -17,29 +17,43 @@
 # Legenda: Descreve telas, seus status, e o fluxo de navegação.
 # ---
 
+## Versão: 1.0.12 (30/09/2025) - Atualizada
+
 ## Telas da Aplicação (Módulo UI)
 
 ### 1. Fluxo de Entrada
 
 -   **Tela:** `SplashScreen` (`SplashScreen.kt`)
-    -   **Descrição:** Primeira tela exibida ao iniciar o app.
+    -   **Descrição:** Primeira tela exibida ao iniciar o app com logo UNIVESP.
     -   **Arquivo:** `app/src/main/java/com/example/fonovirtual_v2/ui/splash/SplashScreen.kt`
-    -   **Status:** `Validado` (v0.2.1)
-    -   **Navega para:** `HomeScreen`.
+    -   **Status:** `✅ VALIDADO` (v0.2.1)
+    -   **Funcionalidades:** Exibe imagem univesp.jpg por 3 segundos ou até toque
+    -   **Navega para:** `HomeScreen`
+    -   **Draft ASCII:**
+        ```
+        +--------------------------------------+
+        |                                      |
+        |          [LOGO UNIVESP]              |
+        |                                      |
+        |      (Fundo Branco - Modo Claro)     |
+        |                                      |
+        |         (3s ou toque)                |
+        +--------------------------------------+
+        ```
 
 ### 2. Tela Principal
 
 -   **Tela:** `HomeScreen` (`HomeScreen.kt`)
-    -   **Descrição:** Tela principal com modo escuro, exibe versão do app (agora "1.0.3") e botões
-        de navegação reorganizados.
+    -   **Descrição:** Tela principal com modo claro, exibe versão dinâmica do app (agora "1.0.12") 
+        e botões de navegação organizados.
     -   **Arquivo:** `app/src/main/java/com/example/fonovirtual_v2/ui/home/HomeScreen.kt`
-    -   **Status:** `✅ VALIDADO` (v1.0.3 - Modo escuro implementado, novos botões adicionados).
-    -   **Navega para:** `DebugScreen`, `SimpleRecognitionExerciseScreen` (via "Teste Rápido"), 
-        (Futuro: Atividades, Resultados, Cadastro).
-    -   **Draft ASCII:** (Atualizado v1.0.3 - Modo Escuro)
+    -   **Status:** `✅ VALIDADO` (v1.0.4 - Modo claro implementado, v1.0.12 - versão dinâmica).
+    -   **Funcionalidades:** Versão obtida dinamicamente via BuildConfig.VERSION_NAME
+    -   **Navega para:** `DebugScreen`, `SimpleRecognitionExerciseScreen` (via "Teste Rápido")
+    -   **Draft ASCII:** (Atualizado v1.0.4 - Modo Claro)
         ```
         +--------------------------------------+
-        | FonoVirtual (Título Branco)          |
+        | FonoVirtual (Título Preto)           |
         |                                      |
         | [█████ Cadastro ████████████████████] |
         | [█████ Teste Rápido ████████████████] |
@@ -48,151 +62,204 @@
         | [█████ Debug ███████████████████████] |
         |                                      |
         |                                      |
-        | Versão: 1.0.3 (Texto Branco)        |
-        | Projeto Integrador VI - 2025         |
-        |          (Texto Branco)              |
+        | Versão: 1.0.12 (Texto Preto)        |
+        | Projeto Integrador VI - 2025        |
+        |                                      |
+        | (Fundo Branco - Modo Claro)          |
         +--------------------------------------+
-        | ████████ FUNDO PRETO ████████████████ |
         ```
 
-### 3. Fluxo de Depuração (Acesso via HomeScreen)
+### 3. Tela de Debug
 
 -   **Tela:** `DebugScreen` (`DebugScreen.kt`)
-    -   **Descrição:** Painel para desenvolvedores testarem módulos.
+    -   **Descrição:** Tela para testar funcionalidades ASR e TTS do aplicativo.
     -   **Arquivo:** `app/src/main/java/com/example/fonovirtual_v2/ui/debug/DebugScreen.kt`
-    -   **Status:** `Validado` (v1.0.1 - Botão "Testar TTS" funcional validado v0.4.0;
-        Botão "Testar ASR" funcional validado v1.0.1, navega para `AsrTestScreen.kt`).
-    -   **Navega para:** `TtsTestScreen`, `asr_test_screen` (rota para `AsrTestScreen.kt`).
-    -   **Draft ASCII:** (Atualização para v1.0.1)
+    -   **Status:** `✅ VALIDADO` (v1.0.2)
+    -   **Navega para:** `TtsTestScreen`, `AsrTestScreen`
+    -   **Draft ASCII:**
         ```
         +--------------------------------------+
-        | Tela de Depuração (TopAppBar)        |
-        +--------------------------------------+
-        | Selecione um módulo para testar:     |
+        | << Tela de Depuração                 |
         |                                      |
-        | [ Button: Testar TTS ] Validado v0.4.0 |
-        | [ Button: Testar ASR ] Validado v1.0.1 |
+        | [████ Testar TTS ███████████████████] |
+        | [████ Testar ASR ███████████████████] |
         |                                      |
-        | (Outros botões de teste futuros...)  |
+        |                                      |
+        | (Fundo Branco - Modo Claro)          |
         +--------------------------------------+
         ```
 
--   **Tela:** `TtsTestScreen` (`TtsTestScreen.kt`)
-    -   **Descrição:** Tela dedicada ao teste da funcionalidade de Text-to-Speech (TTS).
-    -   **Arquivo:** `app/src/main/java/com/example/fonovirtual_v2/ui/tts_test/TtsTestScreen.kt`
-    -   **Status:** `Validado` (v0.4.0).
-    -   **Navega para:** Nenhuma.
-
--   **Tela:** `AsrTestScreen` (`AsrTestScreen.kt`)
-    -   **Descrição:** Tela dedicada ao teste da funcionalidade de Reconhecimento Automático
-        de Fala (ASR) utilizando o módulo Vosk PT-BR. Permite ao usuário iniciar a
-        captura de áudio e visualiza o status e os resultados do reconhecimento.
-    -   **Arquivo:** `app/src/main/java/com/example/fonovirtual_v2/ui/asr_test/AsrTestScreen.kt`
-        (ViewModel: `AsrTestViewModel.kt`)
-    -   **Status:** `✅ VALIDADO` (v1.0.2 - UI e lógica de ASR completamente funcionais e testadas).
-    -   **Navega para:** Nenhuma navegação a partir desta tela (por enquanto).
-    -   **Draft ASCII (v1.0.1 - UI Inicial Validada):**
-        ```
-        +--------------------------------------+
-        | Teste de ASR (TopAppBar)             |
-        +--------------------------------------+
-        | [ Button: Escutar ]                  |
-        |                                      |
-        | Status: Ocioso                     |
-        |                                      |
-        | Última Palavra Reconhecida:          |
-        | +----------------------------------+ |
-        | | (Palavra aqui)                   | |
-        | +----------------------------------+ |
-        |                                      |
-        | Frase Completa Reconhecida:          |
-        | +----------------------------------+ |
-        | | (Frase completa aqui)            | |
-        | +----------------------------------+ |
-        +--------------------------------------+
-        ```
-
-### 4. Fluxo de Exercícios (Acesso via "Teste Rápido" na HomeScreen)
+### 4. Exercícios de Fonoaudiologia - Tela Principal
 
 -   **Tela:** `SimpleRecognitionExerciseScreen` (`SimpleRecognitionExerciseScreen.kt`)
-    -   **Descrição:** Exercício de reconhecimento de palavras fixas, organizadas por número
-        de sílabas (2 a 5). Utiliza ASR para validar pronúncia e TTS para exemplos.
-        O app fica ouvindo continuamente (sem botão) e calcula estatísticas automaticamente.
+    -   **Descrição:** Tela de exercícios com 4 grupos: Sílabas, Sons Consonantais, Dígrafos e Sílaba Tônica.
+        Implementa títulos dinâmicos que mudam conforme a seleção do usuário.
     -   **Arquivo:** `app/src/main/java/com/example/fonovirtual_v2/ui/exercises/recognition/SimpleRecognitionExerciseScreen.kt`
-    -   **Status:** `Validado` (v1.0.3)
-    -   **Navega para:** `ExerciseResultScreen` (via rota com parâmetros `exercise_result/{accuracy}/{correct}/{total}`)
-    -   **Lista de Palavras por Sílabas:**
-        ```
-        Dissílabas (2): casa, bola, pato, mesa, vida
-        Trissílabas (3): projeto, caminhar, trabalho, médico, música
-        Quadrissílabas (4): computação, integrado, chocolate, telefone, abacaxi
-        Pentassílabas (5): geografia, matemática, aplicativo, comunicação, universidade
-        ```
-    -   **Draft ASCII Final (v1.0.3 - Validado):**
+    -   **Status:** `✅ VALIDADO` (v1.0.12 - Títulos dinâmicos, v1.0.11 - Interface reorganizada, v1.0.10 - Sílaba Tônica)
+    -   **Navega para:** `ExerciseResultScreen` (ao completar exercício)
+    -   **Funcionalidades:**
+        - Sistema de títulos dinâmicos contextuais
+        - 4 grupos de exercícios com 24 opções totais
+        - Escuta contínua ASR sem botão
+        - Integração TTS para exemplos sonoros
+    -   **Draft ASCII - Tela de Seleção:** (Atualizado v1.0.12)
         ```
         +--------------------------------------+
-        | Exercício de Pronúncia (TopAppBar)   |
-        +--------------------------------------+
-        | Selecione o número de sílabas:       |
+        | << Escolha o exercício               |
+        |                                      |
+        | Número de Sílabas                    |
         | [2] [3] [4] [5]                      |
         |                                      |
-        | Palavra Atual:                       |
-        | +----------------------------------+ |
-        | |           "borboleta"            | |
-        | +----------------------------------+ |
+        | Sons Consonantais                    |
+        | [BR] [CR] [FR] [GR]                  |
+        | [CL] [FL] [PL] [BL]                  |
         |                                      |
-        | [ Botão: Ouvir Exemplo ]            |
+        | Sons Dígrafos                        |
+        | [LH] [NH] [RR] [SS]                  |
         |                                      |
-        | Status: Ouvindo... (fale agora)     | ← Verde quando ativo
+        | Sílaba Tônica                        |
+        | [Á] [É] [Ê] [Í]                      |
+        | [ÃO] [ÕE] [Ó] [Ú]                    |
         |                                      |
-        | Sua pronúncia:                      |
-        | +----------------------------------+ |
-        | | (Resultado do ASR em tempo real) | |
-        | +----------------------------------+ |
-        |                                      |
-        | [ Botão: Próxima Palavra ]          | ← Sempre visível
+        | (Fundo Branco - Modo Claro)          |
         +--------------------------------------+
         ```
+    -   **Draft ASCII - Durante Exercício:** (Exemplo: "Número de Sílabas: 3")
+        ```
+        +--------------------------------------+
+        | << Número de Sílabas: 3              |
+        |                                      |
+        | +----------------------------------+ |
+        | |            PROJETO               | |
+        | +----------------------------------+ |
+        |                                      |
+        | [████ Ouvir Exemplo ████████████████] |
+        |                                      |
+        | Status: Escutando sua pronúncia...   |
+        | (Verde quando escutando)             |
+        |                                      |
+        | +----------------------------------+ |
+        | | Palavra Reconhecida: "projeto"   | |
+        | +----------------------------------+ |
+        |                                      |
+        | [████ Próxima Palavra ██████████████] |
+        +--------------------------------------+
+        ```
+
+### 5. Tela de Resultados
 
 -   **Tela:** `ExerciseResultScreen` (`ExerciseResultScreen.kt`)
-    -   **Descrição:** Exibe resultados detalhados do exercício com percentual de acerto,
-        estatísticas (acertos/erros/total) e feedback motivacional. Interface limpa
-        com cores padrão do app.
+    -   **Descrição:** Exibe resultados do exercício com percentual de acerto e feedback motivacional.
     -   **Arquivo:** `app/src/main/java/com/example/fonovirtual_v2/ui/exercises/result/ExerciseResultScreen.kt`
-    -   **Status:** `Validado` (v1.0.3)
-    -   **Parâmetros Recebidos:** `accuracy` (%), `correct` (int), `total` (int)
-    -   **Navega para:** `SimpleRecognitionExerciseScreen` (novo exercício) ou `HomeScreen`
-    -   **Draft ASCII Final (v1.0.3 - Validado):**
+    -   **Status:** `✅ VALIDADO` (v1.0.3)
+    -   **Navega para:** `HomeScreen` ou novo exercício
+    -   **Funcionalidades:**
+        - Cálculo automático de percentual (0-100%)
+        - Feedback motivacional baseado na performance
+        - Estatísticas detalhadas (acertos/total)
+    -   **Draft ASCII:**
         ```
         +--------------------------------------+
-        | Resultado do Exercício (TopAppBar)   |
-        +--------------------------------------+
+        | << Resultado do Exercício            |
+        |                                      |
         |         Exercício Concluído!         |
         |                                      |
-        | +----------------------------------+ |
-        | |             85%                  | | ← Percentual destacado
-        | |         Muito Bom!               | | ← Feedback motivacional
-        | |                                  | |
-        | |   Acertos    Erros    Total      | |
-        | |      4         1        5        | | ← Estatísticas
-        | +----------------------------------+ |
+        |    Sua Pontuação: 80% (4/5)         |
         |                                      |
+        |        Muito bem! Continue           |
+        |        praticando!                   |
         |                                      |
+        | [████ Tentar Novamente ██████████████] |
+        | [████ Voltar ao Início ██████████████] |
         |                                      |
-        | [ Tentar Novamente ] [ Voltar Home ] |
+        | (Fundo Branco - Modo Claro)          |
         +--------------------------------------+
         ```
 
-### 5. Fluxo de Navegação Geral (v1.0.3)
+### 6. Telas de Teste de Módulos
+
+#### 6.1 Teste TTS
+-   **Tela:** `TtsTestScreen` (`TtsTestScreen.kt`)
+    -   **Arquivo:** `app/src/main/java/com/example/fonovirtual_v2/ui/tts_test/TtsTestScreen.kt`
+    -   **Status:** `✅ VALIDADO` (v0.4.0)
+    -   **Funcionalidades:** Campo de texto e botão para testar síntese de fala
+
+#### 6.2 Teste ASR  
+-   **Tela:** `AsrTestScreen` (`AsrTestScreen.kt`)
+    -   **Arquivo:** `app/src/main/java/com/example/fonovirtual_v2/ui/asr_test/AsrTestScreen.kt`
+    -   **Status:** `✅ VALIDADO` (v1.0.2)
+    -   **Funcionalidades:** Teste de reconhecimento de voz com permissões
+
+## Fluxo de Navegação Completo
 
 ```
-SplashScreen (3s ou toque)
+SplashScreen (3s)
     ↓
-HomeScreen 
-    ├── Debug → DebugScreen → TtsTestScreen/AsrTestScreen
-    └── Teste Rápido → SimpleRecognitionExerciseScreen 
-                           ↓ (após completar palavras)
-                       ExerciseResultScreen
-                           ├── Tentar Novamente → SimpleRecognitionExerciseScreen
-                           └── Voltar Home → HomeScreen
+HomeScreen
+    ├─→ DebugScreen
+    │   ├─→ TtsTestScreen
+    │   └─→ AsrTestScreen
+    │
+    └─→ SimpleRecognitionExerciseScreen ("Teste Rápido")
+        ├─→ Seleção de Exercício (Títulos Dinâmicos):
+        │   ├─→ "Número de Sílabas: X"
+        │   ├─→ "Sons Consonantais: XX" 
+        │   ├─→ "Sons Dígrafos: XX"
+        │   └─→ "Sílaba Tônica: X"
+        │
+        └─→ ExerciseResultScreen
+            ├─→ HomeScreen (Voltar ao Início)
+            └─→ SimpleRecognitionExerciseScreen (Tentar Novamente)
 ```
+
+## Banco de Dados de Exercícios (WordsRepository.kt)
+
+### Distribuição Completa por Categoria:
+
+#### **Número de Sílabas (20 palavras)**
+- **2 sílabas (5)**: casa, bola, pato, mesa, vida  
+- **3 sílabas (5)**: projeto, caminhar, trabalho, médico, música
+- **4 sílabas (5)**: computação, integrado, chocolate, telefone, abacaxi
+- **5 sílabas (5)**: geografia, matemática, aplicativo, comunicação, universidade
+
+#### **Sons Consonantais (40 palavras)**
+- **BR (5)**: brasil, branco, braço, bravo, biblioteca
+- **CR (5)**: criança, criar, cravo, cristal, crescer  
+- **FR (5)**: fruta, frio, frase, frango, frequente
+- **GR (5)**: grande, grupo, grau, grama, gratidão
+- **CL (5)**: classe, claro, clima, cliente, clínica
+- **FL (5)**: flor, floresta, fluir, flecha, flauta
+- **PL (5)**: planta, planeta, plano, plástico, playground
+- **BL (5)**: bloco, blusa, bloqueio, blindado, biblioteca
+
+#### **Sons Dígrafos (20 palavras)**
+- **LH (5)**: milho, olho, folha, velho, trabalho
+- **NH (5)**: banho, sonho, lenha, manhã, vinho
+- **RR (5)**: carro, barro, ferro, guerra, correio
+- **SS (5)**: massa, passa, pessoa, cassa, pressa
+
+#### **Sílaba Tônica (40 palavras)**
+- **Á (5)**: matemática, prática, fantástico, rápido, árvore
+- **É (5)**: café, pé, mané, chulé, filé
+- **Ê (5)**: você, bebê, português, inglês, três
+- **Í (5)**: país, saída, família, memória, polícia
+- **Ó (5)**: avó, robô, história, território, próximo
+- **Ú (5)**: último, público, úmido, número, fúria
+- **ÃO (5)**: computação, comunicação, educação, informação, aplicação
+- **ÕE (5)**: decisões, emoções, reflexões, tradições, dimensões
+
+### **Total Geral: 100 palavras organizadas em 24 grupos de exercícios**
+
+## Status de Implementação das Telas
+
+| Tela | Status | Versão | Funcionalidades Principais |
+|------|--------|--------|----------------------------|
+| SplashScreen | ✅ Validado | v0.2.1 | Logo UNIVESP, transição automática |
+| HomeScreen | ✅ Validado | v1.0.4 | Modo claro, versão dinâmica |
+| DebugScreen | ✅ Validado | v1.0.2 | Acesso a testes TTS/ASR |
+| SimpleRecognitionExerciseScreen | ✅ Validado | v1.0.12 | Títulos dinâmicos, 4 grupos de exercícios |
+| ExerciseResultScreen | ✅ Validado | v1.0.3 | Percentual, feedback motivacional |
+| TtsTestScreen | ✅ Validado | v0.4.0 | Teste de síntese de fala |
+| AsrTestScreen | ✅ Validado | v1.0.2 | Teste de reconhecimento de voz |
+
+**Todas as telas implementadas estão 100% funcionais e validadas.**

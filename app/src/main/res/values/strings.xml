@@ -44,7 +44,7 @@
     <string name="asr_test_final_result_label">Frase Completa Reconhecida:</string>
 
     <!-- Strings para Exercício de Reconhecimento -->
-    <string name="exercise_recognition_title">Exercício de Pronúncia</string>
+    <string name="exercise_recognition_title">Escolha o exercício</string>
     <string name="exercise_select_syllables">Selecione o número de sílabas:</string>
     <string name="exercise_listen_example">Ouvir Exemplo</string>
     <string name="exercise_start_listening">Iniciar Gravação</string>

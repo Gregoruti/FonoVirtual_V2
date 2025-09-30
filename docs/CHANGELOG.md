@@ -17,6 +17,248 @@
 # Legenda: Lista as versões em ordem decrescente, com as mudanças mais recentes no topo.
 # ---
 
+## Versão 1.0.13 (30/09/2025) - Correção de Bug Crítico nos Exercícios
+
+- **Status da Versão:** `Implementado e Validado`
+- **Resumo das Mudanças:**
+  Correção de bug crítico que causava repetição da primeira palavra em todos os tipos de exercícios.
+  
+- **Bug Corrigido:**
+  - **Problema**: Ao clicar em "Próxima Palavra", a primeira palavra do exercício era repetida
+  - **Causa**: Lógica incorreta no método `loadNextWord()` do ViewModel
+  - **Solução**: Incremento do índice realizado ANTES da verificação e carregamento da palavra
+  - **Impacto**: Afetava todos os tipos de exercícios (Sílabas, Sons Consonantais, Dígrafos, Sílaba Tônica)
+
+- **Arquivos Modificados:**
+  - `SimpleRecognitionExerciseViewModel.kt`: Correção na lógica do método `loadNextWord()`
+  - `app/build.gradle.kts`: Versão atualizada para "1.0.13" e versionCode para 13
+
+- **Teste de Validação:**
+  - **Exercício testado**: Número de Sílabas: 4
+  - **Sequência corrigida**: computação → integrado → chocolate → telefone → abacaxi
+  - **Status**: ✅ Bug completamente resolvido e validado pelo usuário
+
+- **Impactos Técnicos:**
+  - Fluxo de exercícios funcionando corretamente para todos os tipos
+  - Experiência do usuário melhorada significativamente
+  - Sem regressões em funcionalidades existentes
+  - Compilação bem-sucedida (BUILD SUCCESSFUL em 21s)
+
+## Versão 1.0.12 (30/09/2025) - Títulos Dinâmicos nos Exercícios
+
+- **Status da Versão:** `Implementado e Validado`
+- **Resumo das Mudanças:**
+  Implementação de sistema de títulos dinâmicos que mudam contextualmente conforme a seleção do usuário nos exercícios.
+  
+- **Funcionalidades Adicionadas:**
+  - **Títulos Contextuais**: TopAppBar com títulos dinâmicos baseados na seleção do exercício
+  - **Interface Intuitiva**: Usuário sempre sabe qual tipo de exercício está realizando
+  - **Experiência Melhorada**: Feedback visual imediato da seleção feita
+
+- **Arquivos Modificados:**
+  - `SimpleRecognitionExerciseScreen.kt`: Implementado sistema de títulos dinâmicos no TopAppBar
+  - `app/build.gradle.kts`: Versão atualizada para "1.0.12" e versionCode para 12
+  - `SPECIFICATION_FOR_APP.md`: Documentação da nova funcionalidade
+  - `VALIDATION_STATUS.md`: Status atualizado para versão 1.0.12
+
+- **Títulos Implementados:**
+  - **"Número de Sílabas: X"** - Para exercícios de sílabas (2, 3, 4, 5)
+  - **"Sons Consonantais: XX"** - Para exercícios consonantais (BR, CR, FR, GR, CL, FL, PL, BL)
+  - **"Sons Dígrafos: XX"** - Para exercícios de dígrafos (LH, NH, RR, SS)
+  - **"Sílaba Tônica: X"** - Para exercícios de acentuação (Á, É, Ê, Í, Ó, Ú, ÃO, ÕE)
+  - **"Escolha o exercício"** - Título padrão na tela de seleção
+
+- **Impactos Técnicos:**
+  - Sistema condicional baseado no estado do ViewModel
+  - Integração perfeita com todas as funcionalidades existentes
+  - Manutenção da compatibilidade com versões anteriores
+  - Compilação bem-sucedida (BUILD SUCCESSFUL em 17s)
+
+## Versão 1.0.11 (30/09/2025) - Melhorias na Interface do Teste Rápido
+
+- **Status da Versão:** `Implementado e Validado`
+- **Resumo das Mudanças:**
+  Reformulação visual da tela "Teste Rápido" com otimização do layout e reorganização dos exercícios de Sílaba Tônica.
+  
+- **Funcionalidades Melhoradas:**
+  - **Título Otimizado**: Alterado de "Exercício de Pronúncia" para "Escolha o exercício"
+  - **Interface Limpa**: Removida linha redundante "Escolha o tipo de exercício:"
+  - **Layout Otimizado**: Exercícios de Sílaba Tônica reorganizados em duas linhas (4x2)
+  - **Versão Atualizada**: HomeScreen exibindo versão correta dinamicamente
+
+- **Arquivos Modificados:**
+  - `strings.xml`: Título do exercício atualizado
+  - `SimpleRecognitionExerciseScreen.kt`: Interface reorganizada e simplificada
+  - `app/build.gradle.kts`: Versão atualizada para "1.0.11" e versionCode para 11
+  - `HomeScreen.kt`: Versão dinâmica via BuildConfig funcionando
+
+- **Layout da Sílaba Tônica Reorganizado:**
+  - **Primeira linha**: Á, É, Ê, Í (4 botões)
+  - **Segunda linha**: ÃO, ÕE, Ó, Ú (4 botões)
+  - **Melhor aproveitamento**: Espaço da tela otimizado
+  - **Usabilidade**: Interface mais intuitiva e organizada
+
+- **Impactos Técnicos:**
+  - Código mais limpo e organizado
+  - Interface responsiva mantida
+  - Compatibilidade total com funcionalidades existentes
+  - Compilação bem-sucedida (BUILD SUCCESSFUL em 25s)
+
+## Versão 1.0.10 (30/09/2025) - Exercícios de Sílaba Tônica Completos
+
+- **Status da Versão:** `Implementado e Validado`
+- **Resumo das Mudanças:**
+  Implementação completa do sistema de exercícios de Sílaba Tônica com 8 grupos de acentuação totalizando 40 palavras organizadas.
+  
+- **Funcionalidades Adicionadas:**
+  - **Exercícios de Sílaba Tônica**: Novo grupo completo na tela "Teste Rápido"
+  - **8 Grupos de Acentuação**: Sistema organizado por tipos de acento
+  - **40 Palavras Tônicas**: Banco expandido com palavras específicas para cada acento
+  - **Interface Expandida**: Quarta seção adicionada aos exercícios existentes
+
+- **Arquivos Modificados:**
+  - `WordsRepository.kt`: Extensão completa com exercícios de acentuação
+  - `SimpleRecognitionExerciseViewModel.kt`: Lógica para exercícios de sílaba tônica
+  - `SimpleRecognitionExerciseScreen.kt`: Interface expandida com seção "Sílaba Tônica"
+  - `app/build.gradle.kts`: Versão atualizada para "1.0.10"
+
+- **Grupos de Acentuação Implementados:**
+  - **Á**: matemática, prática, fantástico, rápido, árvore (5 palavras)
+  - **É**: café, pé, mané, chulé, filé (5 palavras)
+  - **Ê**: você, bebê, português, inglês, três (5 palavras)
+  - **Í**: país, saída, família, memória, polícia (5 palavras)
+  - **Ó**: avó, robô, história, território, próximo (5 palavras)
+  - **Ú**: último, público, úmido, número, fúria (5 palavras)
+  - **ÃO**: computação, comunicação, educação, informação, aplicação (5 palavras)
+  - **ÕE**: decisões, emoções, reflexões, tradições, dimensões (5 palavras)
+
+- **Sistema de Exercícios Completo:**
+  - **Grupo 1**: Número de Sílabas (4 opções: 2, 3, 4, 5)
+  - **Grupo 2**: Sons Consonantais (8 opções: BR, CR, FR, GR, CL, FL, PL, BL)
+  - **Grupo 3**: Sons Dígrafos (4 opções: LH, NH, RR, SS)
+  - **Grupo 4**: Sílaba Tônica (8 opções: Á, É, Ê, Í, Ó, Ú, ÃO, ÕE) - **NOVO!**
+
+- **Impactos Técnicos:**
+  - Integração completa com sistema ASR/TTS existente
+  - Navegação unificada para todos os tipos de exercício
+  - Sistema de estatísticas compatível
+  - Compilação bem-sucedida (BUILD SUCCESSFUL em 22s)
+
+- **Estatísticas Atualizadas:**
+  - **Total de exercícios**: 24 grupos diferentes
+  - **Total de palavras**: 100 palavras para exercícios de fonoaudiologia
+  - **Distribuição completa**:
+    - 4 níveis de sílabas (20 palavras)
+    - 4 grupos Xr (20 palavras)
+    - 4 grupos Xl (20 palavras)
+    - 4 grupos de dígrafos (20 palavras)
+    - 8 grupos de sílaba tônica (40 palavras)
+
+## Versão 1.0.9 (30/09/2025) - Reestruturação dos Exercícios de Sílaba Tônica
+
+- **Status da Versão:** `Implementado`
+- **Resumo das Mudanças:**
+  Reestruturação completa dos exercícios de sílaba tônica, organizando-os por tipo de acentuação com 5 palavras por grupo, seguindo o padrão estabelecido do app.
+  
+- **Funcionalidades Reestruturadas:**
+  - **Exercícios de Sílaba Tônica**: Reorganizados por tipo de acentuação (Á, É, Í, Ó, Ú, ÃO, ÕE)
+  - **35 Palavras Tônicas**: Distribuídas em 7 grupos com 5 palavras cada
+  - **Sistema Deprecado**: Método antigo `getWordsWithTonic()` marcado como obsoleto
+  - **Novos Métodos**: `getWordsByTonicAccent()` e `getAvailableTonicAccents()`
+
+- **Arquivos Modificados:**
+  - `WordsRepository.kt`: Reestruturada organização de palavras tônicas por acentuação
+  - `VALIDATION_STATUS.md`: Status atualizado para versão 1.0.9
+  - `CHANGELOG.md`: Documentação das mudanças da versão 1.0.9
+
+- **Grupos de Acentuação Implementados:**
+  - **Á**: música, matemática, prática, fantástico
+  - **É**: café, você, bebê, português, inglês
+  - **Í**: país, saída, família, memória, polícia
+  - **Ó**: avó, robô, história, território, próximo
+  - **Ú**: último, público, úmido, período, número
+  - **ÃO**: computação, comunicação, educação, informação, aplicação
+  - **ÕE**: decisões, emoções, reflexões, tradições, dimensões
+
+- **Impactos Técnicos:**
+  - Estrutura padronizada com 5 palavras por grupo
+  - Compatibilidade mantida com sistema ASR/TTS
+  - Organização alfabética dos tipos de acentuação
+  - Preparação para futura integração na interface do usuário
+
+- **Estatísticas Atualizadas:**
+  - **Total de palavras tônicas**: 35 palavras organizadas por acentuação
+  - **Total geral do projeto**: 105 palavras (70 anteriores + 35 tônicas)
+  - **Distribuição de grupos tônicos**:
+    - 7 tipos de acentuação (Á, É, Í, Ó, Ú, ÃO, ÕE)
+    - 5 palavras por tipo de acentuação
+
+## Versão 1.0.8 (30/09/2025) - Remoção do Grupo de Dígrafo CH
+
+- **Status da Versão:** `Implementado`
+- **Resumo das Mudanças:**
+  Remoção do grupo de exercícios de dígrafo CH e suas 5 palavras associadas do banco de dados.
+  
+- **Funcionalidades Removidas:**
+  - **Dígrafo CH**: Removido do grupo "Sons Dígrafos"
+  - **5 Palavras Removidas**: chave, chuva, cheiro, chocolate, chamar
+  - **Interface Atualizada**: Grupo "Sons Dígrafos" agora possui apenas 4 opções (LH, NH, RR, SS)
+
+- **Arquivos Modificados:**
+  - `WordsRepository.kt`: Removida lista de palavras do dígrafo CH
+  - `VALIDATION_STATUS.md`: Status atualizado para versão 1.0.8
+  - `CHANGELOG.md`: Documentação das mudanças da versão 1.0.8
+
+- **Dígrafos Restantes:**
+  - **LH**: milho, olho, folha, velho, trabalho
+  - **NH**: banho, sonho, lenha, manhã, vinho
+  - **RR**: carro, barro, ferro, guerra, correio
+  - **SS**: massa, passa, pessoa, cassa, pressa
+
+- **Impactos Técnicos:**
+  - Redução de 20 para 15 palavras no grupo de dígrafos
+  - Manutenção da compatibilidade com sistema ASR/TTS
+  - Interface automaticamente atualizada (4 botões em vez de 5)
+
+- **Estatísticas Atualizadas:**
+  - **Total de palavras**: 70 palavras (redução de 5 palavras)
+  - **Distribuição atual**:
+    - 4 níveis de sílabas (20 palavras)
+    - 4 grupos Xr (20 palavras) 
+    - 4 grupos Xl (20 palavras)
+    - 4 grupos de dígrafos (20 palavras) - anteriormente 5 grupos
+
+## Versão 1.0.7 (30/09/2025) - Implementação de Exercícios de Dígrafos
+
+- **Status da Versão:** `Implementado e Validado`
+- **Resumo das Mudanças:**
+  Implementação completa dos exercícios de dígrafos (CH, LH, NH, RR, SS) na funcionalidade "Teste Rápido".
+  
+- **Funcionalidades Adicionadas:**
+  - **Exercícios de Dígrafos**: Novo grupo de exercícios focado em palavras com dígrafos (CH, LH, NH, RR, SS)
+  - **25 Novas Palavras**: Banco de palavras expandido com 5 palavras para cada dígrafo
+  - **Interface Atualizada**: Tela de exercícios agora possui três grupos: "Número de Sílabas", "Sons Consonantais" e "Sons Dígrafos"
+  - **ViewModel Expandido**: Adicionada função `selectDigraph()` no SimpleRecognitionExerciseViewModel
+
+- **Arquivos Modificados:**
+  - `WordsRepository.kt`: Adicionadas listas de palavras por dígrafos e métodos de acesso
+  - `SimpleRecognitionExerciseViewModel.kt`: Implementado suporte para exercícios de dígrafos
+  - `SimpleRecognitionExerciseScreen.kt`: Interface atualizada com grupo "Sons Dígrafos"
+  - `VALIDATION_STATUS.md`: Status atualizado para refletir a nova funcionalidade
+  - `CHANGELOG.md`: Documentação das mudanças da versão 1.0.7
+
+- **Palavras por Dígrafo:**
+  - **CH**: chave, chuva, cheiro, chocolate, chamar
+  - **LH**: milho, olho, folha, velho, trabalho
+  - **NH**: banho, sonho, lenha, manhã, vinho
+  - **RR**: carro, barro, ferro, guerra, correio
+  - **SS**: massa, passa, pessoa, cassa, pressa
+
+- **Impactos Técnicos:**
+  - Correção do erro "Unresolved reference 'selectDigraph'" 
+  - Integração completa com sistema ASR/TTS existente
+  - Manutenção da compatibilidade com exercícios anteriores (sílabas e sons consonantais)
+
 ## Reestruturação da Documentação (/docs) - Marco de Organização
 
 - **Status Geral da Mudança:** `Concluído`
@@ -33,6 +275,61 @@
   - Preparação do terreno para a remoção de conteúdo duplicado (o "Prompt Geral") de dentro do `SPECIFICATION_FOR_APP.MD`, tornando-o mais enxuto e focado.
 - **Próximos Passos Imediatos Relacionados:**
   - Remoção da seção de diretrizes gerais temporárias do arquivo `SPECIFICATION_FOR_APP.MD`.
+
+## 1.0.6 - 30/09/2025 - Exercícios de Sons Consonantais "Xl" Validados
+
+- **Status Geral da Versão:** `✅ TOTALMENTE VALIDADO E DEPLOYADO`
+- **Resumo da Implementação:** Implementação e validação completa de exercícios focados em sons consonantais 
+  "Xl" (CL, FL, PL, BL) expandindo ainda mais as opções de exercícios de fonoaudiologia na tela "Teste Rápido".
+
+### **Nova Funcionalidade: Terceira Linha de Exercícios - Sons Consonantais Xl (30/09/2025):**
+- **WordsRepository.kt - Novos Grupos de Palavras Xl:**
+  - **CL**: classe, claro, clima, cliente, clínica (5 palavras)
+  - **FL**: flor, floresta, fluir, flecha, flauta (5 palavras)
+  - **PL**: planta, planeta, plano, plástico, playground (5 palavras)
+  - **BL**: bloco, blusa, bloqueio, blindado, biblioteca (5 palavras)
+  - **Total**: 20 novas palavras organizadas por grupos consonantais Xl
+
+### **Interface Expandida na Tela "Teste Rápido" (30/09/2025):**
+- **Três Linhas de Exercícios Completas:**
+  - **Primeira linha**: Exercícios por Número de Sílabas
+    - Botões: **[2]** **[3]** **[4]** **[5]** (números limpos, otimizados)
+  - **Segunda linha**: Exercícios por Sons Consonantais Xr
+    - Botões: **[BR]** **[CR]** **[FR]** **[GR]**
+  - **Terceira linha**: Exercícios por Sons Consonantais Xl (NOVO!)
+    - Botões: **[CL]** **[FL]** **[PL]** **[BL]**
+
+### **Melhorias na Interface (30/09/2025):**
+- **Layout organizado:** Três seções bem definidas com divisores visuais
+- **Títulos explicativos:** Cada seção com descrição clara do tipo de exercício
+- **Botões uniformes:** Padrão visual consistente em todas as linhas
+- **Experiência fluida:** Mesmo fluxo de exercício para todos os tipos
+
+### **Validação Completa no Dispositivo (30/09/2025):**
+- **Deploy realizado:** Samsung Galaxy S10e (SM-G970F - Android 12)
+- **Testes funcionais:** Exercícios de sons consonantais Xl validados pelo usuário
+- **Interface confirmada:** Layout com três linhas funcionando perfeitamente
+- **ASR/TTS operacional:** Reconhecimento e síntese funcionando com todas as 60 palavras
+
+### **Estatísticas do Projeto (30/09/2025):**
+- **Total de exercícios:** 12 grupos diferentes
+- **Total de palavras:** 60 palavras para exercícios de fonoaudiologia
+- **Distribuição:**
+  - 4 níveis de sílabas (20 palavras)
+  - 4 grupos Xr (20 palavras)
+  - 4 grupos Xl (20 palavras)
+
+### **Componentes Atualizados:**
+- **WordsRepository.kt:** Estrutura expandida com grupos consonantais Xl
+- **SimpleRecognitionExerciseViewModel.kt:** Suporte para três tipos de exercício
+- **SimpleRecognitionExerciseScreen.kt:** Interface com três seções de botões
+- **build.gradle.kts:** Versão atualizada para "1.0.6"
+
+- **Status de Validação:** ✅ **EXERCÍCIOS DE SONS CONSONANTAIS XL COMPLETAMENTE VALIDADOS**
+  - Nova funcionalidade testada e aprovada pelo usuário no dispositivo
+  - Interface com três linhas confirmada como funcional
+  - 20 novas palavras XL funcionando perfeitamente
+  - Expansão bem-sucedida dos exercícios de fonoaudiologia para 60 palavras totais
 
 ## 1.0.5 - 30/09/2025 - Exercícios de Sons Consonantais "Xr"
 
@@ -304,7 +601,7 @@
   - **Atualização dos Recursos de String (`strings.xml`):
     - Adicionadas novas strings para a `AsrTestScreen`.
     - Removida a string `title_screen_asr_test_placeholder`.
-  - **Atualização da Versão no Gradle (`app/build.gradle.kts`):
+  - **Atualização da Versão do Gradle (`app/build.gradle.kts`):
     - `versionName` alterado para `"1.0.1"`.
     - `versionCode` incrementado para `2`.
 
@@ -328,7 +625,7 @@
 - **Status Geral da Versão:** `Em Teste`
 - **Resumo da Validação:** O módulo de Reconhecimento Automático de Fala (ASR), `VoskAsrModule.kt`, teve sua lógica de inicialização criticamente corrigida. A `HomeScreen.kt` foi atualizada para exibir a versão do app dinamicamente (`BuildConfig.VERSION_NAME`, atualmente "1.0"). A `DebugScreen.kt` agora inclui um botão "Testar ASR" que navega para uma tela placeholder (`PlaceholderAsrTestScreen` definida em `MainActivity.kt`). Foram adicionadas as strings necessárias em `strings.xml` para estas alterações. Com estas correções e adições, o build do projeto foi validado, a aplicação pode ser executada, e a documentação foi sincronizada para `v1.0.0`, permitindo o início dos testes da funcionalidade ASR.
 
-- **Histórico de Correções e Adições da v1.0.0 (Rastreabilidade):**
+- **Histórico de Correções e Adições da v1.0.0:**
   - **Correção da Inicialização do Módulo ASR (`VoskAsrModule.kt`):**
     - Resolveu o erro de compilação "Argument type mismatch".
   - **Adição de Recursos de String (`strings.xml`):

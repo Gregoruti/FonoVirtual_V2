@@ -118,6 +118,54 @@ Baseado no estado anterior do projeto (FonoVirtual_V2 v1.0.1):
         -   Instalação via ADB automatizada (BUILD SUCCESSFUL em 12s). (Validado)
         -   Testes funcionais confirmados no dispositivo físico. (Validado)
         -   Controle de versão sincronizado no GitHub (commit hash: d516298). (Validado)
+-   **Versão 1.0.10:**
+    -   **Exercícios de Sílaba Tônica:** Sistema completo de exercícios por acentuação implementado e validado.
+        -   `WordsRepository.kt`: Extensão com exercícios organizados por tipos de acentuação. (Validado)
+            - Grupo "Á": matemática, prática, fantástico, rápido, árvore. (Validado)
+            - Grupo "É": café, pé, mané, chulé, filé. (Validado)
+            - Grupo "Ê": você, bebê, português, inglês, três. (Validado)
+            - Grupo "Í": país, saída, família, memória, polícia. (Validado)
+            - Grupo "Ó": avó, robô, história, território, próximo. (Validado)
+            - Grupo "Ú": último, público, úmido, número, fúria. (Validado)
+            - Grupo "ÃO": computação, comunicação, educação, informação, aplicação. (Validado)
+            - Grupo "ÕE": decisões, emoções, reflexões, tradições, dimensões. (Validado)
+        -   `SimpleRecognitionExerciseScreen.kt`: Interface expandida com seção "Sílaba Tônica". (Validado)
+        -   `SimpleRecognitionExerciseViewModel.kt`: Lógica estendida para exercícios de acentuação. (Validado)
+        -   Navegação integrada com os demais tipos de exercício (sílabas, consonantais, dígrafos). (Validado)
+        -   Sistema de estatísticas compatível com todos os tipos de exercício. (Validado)
+        -   Interface unificada mantendo consistência visual com demais funcionalidades. (Validado)
+        -   Compilação bem-sucedida (BUILD SUCCESSFUL em 22s). (Validado)
+
+-   **Versão 1.0.11:**
+    -   **Melhorias na Interface do Teste Rápido:** Reformulação visual e organização implementada e validada.
+        -   `strings.xml`: Título alterado de "Exercício de Pronúncia" para "Escolha o exercício". (Validado)
+        -   `SimpleRecognitionExerciseScreen.kt`: Remoção da linha redundante "Escolha o tipo de exercício:". (Validado)
+        -   Interface de Sílaba Tônica reorganizada em duas linhas com 4 botões cada (4x2 layout). (Validado)
+        -   Layout otimizado para melhor aproveitamento do espaço e usabilidade. (Validado)
+        -   Versão atualizada para 1.0.11 com versionCode 11. (Validado)
+        -   HomeScreen exibindo versão correta "V1.0.11" dinamicamente via BuildConfig. (Validado)
+        -   Compilação bem-sucedida (BUILD SUCCESSFUL em 25s). (Validado)
+
+-   **Versão 1.0.12:**
+    -   **Títulos Dinâmicos nos Exercícios:** Sistema de títulos contextuais implementado e validado.
+        -   `SimpleRecognitionExerciseScreen.kt`: TopAppBar com títulos dinâmicos baseados na seleção. (Validado)
+        -   Títulos específicos por tipo de exercício:
+            - "Número de Sílabas: X" para exercícios de sílabas. (Validado)
+            - "Sons Consonantais: XX" para exercícios consonantais (BR, CR, FR, GR, CL, FL, PL, BL). (Validado)
+            - "Sons Dígrafos: XX" para exercícios de dígrafos (LH, NH, RR, SS). (Validado)
+            - "Sílaba Tônica: X" para exercícios de acentuação (Á, É, Ê, Í, Ó, Ú, ÃO, ÕE). (Validado)
+        -   Interface contextual que melhora a experiência do usuário. (Validado)
+        -   Versão atualizada para 1.0.12 com versionCode 12. (Validado)
+        -   Compilação bem-sucedida (BUILD SUCCESSFUL em 17s). (Validado)
+-   **Versão 1.0.13:**
+    -   **Correção de Bug Crítico nos Exercícios:** Bug de repetição da primeira palavra completamente resolvido e validado.
+        -   `SimpleRecognitionExerciseViewModel.kt`: Correção na lógica do método `loadNextWord()`. (Validado)
+        -   Problema: Incremento do índice realizado após verificação, causando repetição da primeira palavra. (Corrigido)
+        -   Solução: Incremento do índice realizado ANTES da verificação e carregamento da próxima palavra. (Validado)
+        -   Teste validado: Exercício "4 sílabas" funcionando corretamente (computação → integrado → chocolate → telefone → abacaxi). (Validado)
+        -   Impacto: Todos os tipos de exercícios (Sílabas, Sons Consonantais, Dígrafos, Sílaba Tônica) funcionando perfeitamente. (Validado)
+        -   Versão atualizada para 1.0.13 com versionCode 13. (Validado)
+        -   Compilação bem-sucedida (BUILD SUCCESSFUL em 21s). (Validado)
 
 ## Funcionalidades em Desenvolvimento (UNDER_DEVELOPMENT)
 

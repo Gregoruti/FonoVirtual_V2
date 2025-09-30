@@ -1,6 +1,7 @@
 package com.example.fonovirtual_v2.ui.exercises.recognition
 
 import android.Manifest
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -59,7 +60,7 @@ fun SimpleRecognitionExerciseScreen(
 
     // Efeito para monitorar quando não há mais palavras
     LaunchedEffect(currentWord) {
-        if ((viewModel.selectedSyllableCount != null || viewModel.selectedConsonantGroup != null) && currentWord == null) {
+        if ((viewModel.selectedSyllableCount != null || viewModel.selectedConsonantGroup != null || viewModel.selectedConsonantGroupXL != null || viewModel.selectedDigraph != null || viewModel.selectedTonicAccent != null) && currentWord == null) {
             // Se já selecionou um tipo de exercício mas não tem palavra atual, significa que acabou
             navController.navigate("exercise_result") {
                 // Evita que o usuário volte para a última palavra ao pressionar voltar
@@ -71,7 +72,17 @@ fun SimpleRecognitionExerciseScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.exercise_recognition_title)) },
+                title = {
+                    val titleText = when {
+                        viewModel.selectedSyllableCount != null -> "Número de Sílabas: ${viewModel.selectedSyllableCount}"
+                        viewModel.selectedConsonantGroup != null -> "Sons Consonantais: ${viewModel.selectedConsonantGroup}"
+                        viewModel.selectedConsonantGroupXL != null -> "Sons Consonantais: ${viewModel.selectedConsonantGroupXL}"
+                        viewModel.selectedDigraph != null -> "Sons Dígrafos: ${viewModel.selectedDigraph}"
+                        viewModel.selectedTonicAccent != null -> "Sílaba Tônica: ${viewModel.selectedTonicAccent}"
+                        else -> stringResource(R.string.exercise_recognition_title)
+                    }
+                    Text(titleText)
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -87,7 +98,7 @@ fun SimpleRecognitionExerciseScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            if (viewModel.selectedSyllableCount == null && viewModel.selectedConsonantGroup == null) {
+            if (viewModel.selectedSyllableCount == null && viewModel.selectedConsonantGroup == null && viewModel.selectedConsonantGroupXL == null && viewModel.selectedDigraph == null && viewModel.selectedTonicAccent == null) {
                 ExerciseTypeSelectionSection(viewModel = viewModel)
             } else {
                 currentWord?.let { word ->
@@ -130,78 +141,81 @@ fun SimpleRecognitionExerciseScreen(
 @Composable
 private fun ExerciseTypeSelectionSection(viewModel: SimpleRecognitionExerciseViewModel) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(24.dp)
+        modifier = Modifier.fillMaxSize().background(Color.White),
+        verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.Top),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Grupo 1: Número de Sílabas
         Text(
-            text = "Escolha o tipo de exercício:",
-            style = MaterialTheme.typography.titleLarge,
-            textAlign = TextAlign.Center
-        )
-
-        // Primeira linha: Exercícios por número de sílabas
-        SyllableSelectionSection(viewModel = viewModel)
-
-        // Divisor visual
-        HorizontalDivider(
-            modifier = Modifier.fillMaxWidth(0.8f),
-            thickness = 1.dp,
-            color = MaterialTheme.colorScheme.outline
-        )
-
-        // Segunda linha: Exercícios por sons consonantais
-        ConsonantGroupSelectionSection(viewModel = viewModel)
-    }
-}
-
-@Composable
-private fun SyllableSelectionSection(viewModel: SimpleRecognitionExerciseViewModel) {
-    val availableCounts = remember { WordsRepository.getAvailableSyllableCounts() }
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        Text(
-            text = "Exercícios por Número de Sílabas",
+            text = "Número de Sílabas",
             style = MaterialTheme.typography.titleMedium,
-            textAlign = TextAlign.Center
+            color = Color.Black,
+            modifier = Modifier.padding(top = 32.dp)
         )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            availableCounts.forEach { count ->
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            WordsRepository.getAvailableSyllableCounts().forEach { count ->
                 Button(onClick = { viewModel.selectSyllableCount(count) }) {
-                    Text(count.toString())
+                    Text(text = count.toString())
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun ConsonantGroupSelectionSection(viewModel: SimpleRecognitionExerciseViewModel) {
-    val availableGroups = remember { WordsRepository.getAvailableConsonantGroups() }
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
+        // Grupo 2: Sons Consonantais
         Text(
-            text = "Exercícios por Sons Consonantais",
+            text = "Sons Consonantais",
             style = MaterialTheme.typography.titleMedium,
-            textAlign = TextAlign.Center
+            color = Color.Black,
+            modifier = Modifier.padding(top = 16.dp)
         )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            availableGroups.forEach { group ->
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            WordsRepository.getAvailableConsonantGroups().forEach { group ->
                 Button(onClick = { viewModel.selectConsonantGroup(group) }) {
-                    Text(group)
+                    Text(text = group)
+                }
+            }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            WordsRepository.getAvailableConsonantGroupsXL().forEach { group ->
+                Button(onClick = { viewModel.selectConsonantGroupXL(group) }) {
+                    Text(text = group)
+                }
+            }
+        }
+        // Grupo 3: Sons Dígrafos
+        Text(
+            text = "Sons Dígrafos",
+            style = MaterialTheme.typography.titleMedium,
+            color = Color.Black,
+            modifier = Modifier.padding(top = 16.dp)
+        )
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            WordsRepository.getAvailableDigraphs().forEach { digraph ->
+                Button(onClick = { viewModel.selectDigraph(digraph) }) {
+                    Text(text = digraph)
+                }
+            }
+        }
+
+        // Grupo 4: Sílaba Tônica
+        Text(
+            text = "Sílaba Tônica",
+            style = MaterialTheme.typography.titleMedium,
+            color = Color.Black,
+            modifier = Modifier.padding(top = 16.dp)
+        )
+        val tonicAccents = WordsRepository.getAvailableTonicAccents()
+        // Primeira linha com 4 botões
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            tonicAccents.take(4).forEach { accent ->
+                Button(onClick = { viewModel.selectTonicAccent(accent) }) {
+                    Text(text = accent)
+                }
+            }
+        }
+        // Segunda linha com 4 botões
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            tonicAccents.drop(4).forEach { accent ->
+                Button(onClick = { viewModel.selectTonicAccent(accent) }) {
+                    Text(text = accent)
                 }
             }
         }

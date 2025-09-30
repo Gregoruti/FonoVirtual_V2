@@ -18,8 +18,8 @@ android {
         applicationId = "com.example.fonovirtual_v2"
         minSdk = 24
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.0.5"
+        versionCode = 13
+        versionName = "1.0.13"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
